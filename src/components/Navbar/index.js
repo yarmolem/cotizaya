@@ -22,7 +22,7 @@ const Navbar = ({ onOpen = () => {} }) => {
         </svg>
       </button>
 
-      <img src="/logo/logo.png" alt="Logo Cotiza ya" />
+      <img src="/logo/logo1.png" alt="Logo Cotiza ya" />
     </div>
   )
 }
