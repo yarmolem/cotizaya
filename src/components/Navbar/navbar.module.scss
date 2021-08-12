@@ -1,0 +1,27 @@
+@import '@/styles/variables';
+
+$size_bars: 35px;
+
+.navbar {
+  display: grid;
+  padding: 0 2rem;
+  align-items: center;
+  // background-color: $primary;
+  background: linear-gradient(160deg, rgba(255,222,0,1) 0%, rgba(230,176,0,1) 100%);
+  grid-template-columns: 40px 1fr 40px;
+
+  &_bars {
+    width: $size_bars;
+    height: $size_bars;
+
+    svg {
+      fill: $secundary;
+    }
+  }
+
+  img {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+  }
+}

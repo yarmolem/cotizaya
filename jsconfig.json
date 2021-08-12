@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/svg/*": ["./src/svg/*"],
+      "@/data/*": ["./src/data/*"],
+      "@/hooks/*": ["./src/hooks/*"],
+      "@/styles/*": ["./src/styles/*"],
+      "@/section/*": ["./src/section/*"],
+      "@/components/*": ["./src/components/*"]
+  }
+},
+  "exclude": ["node_modules"]
+}

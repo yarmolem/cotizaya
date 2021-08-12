@@ -1,0 +1,65 @@
+@import '@/styles/mixins';
+@import '@/styles/variables';
+
+.features {
+  margin-block: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  div {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    svg {
+      width: 80px;
+      min-width: 80px;
+      max-width: 80px;
+      margin-left: 0;
+      fill: $primary-500;
+      margin-bottom: 2rem;
+      
+      @include break_md {
+        width: 80px;
+      }
+    }
+
+    h3 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      white-space: normal;
+
+
+      @include break_sm {
+        font-size: 2.5rem;
+      }
+      @include break_md {
+        font-size: 2.3rem;
+      }
+      @include break_lg {
+        font-size: 1.7rem;
+      }
+    }
+  }
+
+  button {
+    width: 200px;
+
+    @include break_sm {
+      width: 100px;
+      margin-right: 5rem;
+    }
+    @include break_md {
+      margin-right: 0rem;
+    }
+    @include break_xl {
+      margin-right: 0rem;
+    }
+
+    svg {
+      fill: $primary-500; 
+    }
+  }
+}

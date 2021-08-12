@@ -1,0 +1,29 @@
+@import '@/styles/variables';
+
+.slider {
+
+  &_dots {
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    background: transparent;
+    justify-content: center;
+  }
+
+  &_dot {
+    height: 5rem;
+    font-size: 10rem;
+    line-height: 1.8rem;
+    border: 0;
+    background: transparent;
+    transition: color 100ms ease;
+  }
+  
+  &_dotactive {
+    color: $primary-500;
+  }
+  
+  &_dotinactive {
+    color: $primary-200;
+  }
+}
