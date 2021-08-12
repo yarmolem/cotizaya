@@ -3,8 +3,6 @@ import { useEffect, useState } from 'react'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
 
-
-
 // data
 import { SLIDES } from '@/data/SLIDES'
 
@@ -46,9 +44,9 @@ const Features = () => {
     setActualSlide(1)
   }, [nroSlides])
 
-  const updateSlide = ({ currentSlide }) => {
-    setActualSlide(currentSlide)
-  }
+  // const updateSlide = ({ currentSlide }) => {
+  //   setActualSlide(currentSlide)
+  // }
 
   const handleNext = () => {
     if (actualSlide === SLIDES.length) return
