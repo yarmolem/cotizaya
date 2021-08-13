@@ -3,40 +3,37 @@
 .cotizador {
   padding-block: 2rem;
 
-  h2 {
-    line-height: 1.25;
-    text-align: center;
-    font-weight: bolder;
-    margin-bottom: 3rem;
-    letter-spacing: 0px;
-
-  }
 
   &_header {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     margin-bottom: 3rem;
 
     div {
       display: flex;
-      align-items: center;
+      flex-direction: column;
       margin-bottom: 1.5rem;
 
       span {
-        margin: 0;
-        width: 35px;
-        height: 35px;
+        margin: 0 auto;
+        width: 50px;
+        min-width: 50px;
+        height: 50px;
         display: grid;
         font-weight: 700;
-        font-size: 1.8rem;
-        border-radius: 50%;
+        font-size: 2rem;
+        border-radius: 8px;
         place-items: center;
-        margin-right: 1.5rem;
-        border: 2px solid $primary-500;
+        margin-bottom: 1.5rem;
+
+        transition: all 0.3s ease-in;
       }
 
       p {
         margin: 0;
-        font-weight: 600;
-        font-size: 1.8rem;
+        font-size: 1.4rem;
+        text-align: center;
         line-height: 1.8rem;
       }
     }
@@ -52,6 +49,41 @@
       width: 100%;
     }
   }
+}
 
+// HEADER CHANGE COLOR
 
+.item_active {
+  color: $dark;
+
+  span {
+    background-color: $primary-500;
+  }
+}
+
+.item_inactive {
+  color: $letter-gray;
+
+  span {
+    background-color: $gray;
+  }
+}
+
+// INPUT CHANGE COLOR
+
+.input_active {
+  position: relative;
+
+  svg {
+    top: 10px;
+    left: 10px;
+    width: 30px;
+    fill: $primary;
+    position: absolute;
+  }
+
+  select {
+    border: 2px solid $primary;
+    transition: border 0.3s ease-in-out;
+  }
 }

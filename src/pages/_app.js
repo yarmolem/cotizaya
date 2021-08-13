@@ -1,14 +1,14 @@
-import '@fontsource/poppins'
+import '@fontsource/roboto'
 import '@/styles/styles.scss'
 import 'react-slidy/lib/index.scss'
-import 'swiper/swiper.scss'
+import 'swiper/swiper-bundle.min.css'
 
 // components
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
 import useDisclosure from '@/hooks/useDisclosure'
 
-function MyApp ({ Component, pageProps }) {
+const MyApp = ({ Component, pageProps }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (

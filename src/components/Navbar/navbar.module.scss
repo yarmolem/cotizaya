@@ -3,6 +3,9 @@
 $size_bars: 35px;
 
 .navbar {
+  z-index: 1300;
+  position: sticky;
+  top: 0;
   display: grid;
   padding: 0 2rem;
   align-items: center;

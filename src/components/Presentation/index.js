@@ -5,7 +5,7 @@ import Slider from 'react-slidy'
 // styles
 import styles from './presentation.module.scss'
 
-const SLIDES = ['image1.jpg', 'image1.jpg', 'image1.jpg']
+const SLIDES = ['image1.jpg', 'image2.jpg', 'image3.jpg']
 
 const Presentation = () => {
   const [actualSlide, setActualSlide] = useState(0)

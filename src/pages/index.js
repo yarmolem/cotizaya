@@ -2,6 +2,7 @@ import Head from 'next/head'
 
 // components
 import Hero from '@/section/Home/Hero/Hero'
+import Features from '@/components/Features'
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       </Head>
 
       <Hero />
+      <Features />
     </div>
   )
 }
