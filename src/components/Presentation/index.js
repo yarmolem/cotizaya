@@ -1,6 +1,9 @@
-// terceros
 import { useState } from 'react'
+// terceros
 import Slider from 'react-slidy'
+
+// svg
+import Dot from '@/svg/Dot'
 
 // styles
 import styles from './presentation.module.scss'
@@ -19,7 +22,7 @@ const Presentation = () => {
   }
 
   return (
-    <div>
+    <div className={styles.slider}>
       <Slider showArrows={false} doAfterSlide={updateSlide} slide={actualSlide}>
         {SLIDES.map((img, i) => (
           <img key={`img-${i}`} src={`/images/${img}`} alt="" />
@@ -29,13 +32,13 @@ const Presentation = () => {
         {SLIDES.map((_, index) => {
           const isActive = index === actualSlide
           return (
-            <button
+            <span
               key={index}
               onClick={() => updateSlide({ currentSlide: index })}
               className={`${styles.slider_dot} ${dotStyles(isActive)}`}
             >
-              <span>&bull;</span>
-            </button>
+              <Dot />
+            </span>
           )
         })}
       </div>

@@ -11,9 +11,9 @@ const Navbar = ({ onOpen = () => {} }) => {
           focusable="false"
           data-prefix="fas"
           aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 448 512"
           className={styles.navbar_bars}
+          xmlns="http://www.w3.org/2000/svg"
         >
           <path
             fill="#1f4e81"
@@ -22,7 +22,7 @@ const Navbar = ({ onOpen = () => {} }) => {
         </svg>
       </button>
 
-      <img src="/logo/logo1.png" alt="Logo Cotiza ya" />
+      <img src="/logo/logo.svg" alt="Logo Cotiza ya" />
     </div>
   )
 }

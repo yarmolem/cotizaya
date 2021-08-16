@@ -9,6 +9,7 @@ import { brands } from '@/data/cars'
 // styles
 import styles from './cotizador.module.scss'
 import Check from '@/svg/Check'
+import Select from '../Select'
 
 const Cotizador = () => {
   const { form, motors, models, setForm, handleChange } = useCotizador()
@@ -50,10 +51,11 @@ const Cotizador = () => {
         {/* marcas */}
         <div className={styles.input_active}>
           {isModelActive ? <Check /> : null}
-          <select
+          <Select
             name="brand"
             value={form.brand}
-            style={{ paddingLeft: isModelActive ? '5rem' : '' }}
+            // style={{ paddingLeft: isModelActive ? '5rem' : '' }}
+            className={isModelActive ? styles.select_active : ''}
             onChange={(e) => {
               handleChange(e)
               setForm((f) => ({ ...f, model: '', motor: '' }))
@@ -65,15 +67,16 @@ const Cotizador = () => {
                 {brand}
               </option>
             ))}
-          </select>
+          </Select>
         </div>
         {/* modelos */}
         <div className={isModelActive ? styles.input_active : ''}>
           {isMotorActive ? <Check /> : null}
-          <select
+          <Select
             name="model"
             value={form.model}
-            style={{ paddingLeft: isMotorActive ? '5rem' : '' }}
+            // style={{ paddingLeft: isMotorActive ? '5rem' : '' }}
+            className={isMotorActive ? styles.select_active : ''}
             onChange={(e) => {
               handleChange(e)
               setForm((f) => ({ ...f, motor: '' }))
@@ -85,18 +88,19 @@ const Cotizador = () => {
                 {m.model}
               </option>
             ))}
-          </select>
+          </Select>
         </div>
         {/* motores */}
         <div
           className={isModelActive && isMotorActive ? styles.input_active : ''}
         >
           {form.motor !== '' ? <Check /> : null}
-          <select
+          <Select
             name="motor"
             value={form.motor}
             onChange={handleChange}
-            style={{ paddingLeft: form.motor !== '' ? '5rem' : '' }}
+            // style={{ paddingLeft: form.motor !== '' ? '5rem' : '' }}
+            className={form.motor !== '' ? styles.select_active : ''}
           >
             <option value="1">Ingresa el motor</option>
             {motors.map((motor) => (
@@ -104,7 +108,7 @@ const Cotizador = () => {
                 {motor}
               </option>
             ))}
-          </select>
+          </Select>
         </div>
 
         <button

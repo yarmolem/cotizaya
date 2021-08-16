@@ -2,13 +2,15 @@
 
 .cotizador {
   padding-block: 2rem;
+  max-width: 100vw;
 
 
   &_header {
     display: grid;
-    gap: 1rem;
+    // gap: 1rem;
+    width: 100%;
+    margin-bottom: 2rem;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    margin-bottom: 3rem;
 
     div {
       display: flex;
@@ -74,7 +76,8 @@
 .input_active {
   position: relative;
 
-  svg {
+  & > svg {
+    z-index: 2;
     top: 10px;
     left: 10px;
     width: 30px;
@@ -86,4 +89,8 @@
     border: 2px solid $primary;
     transition: border 0.3s ease-in-out;
   }
+}
+
+.select_active {
+  padding-left: 5rem;
 }
