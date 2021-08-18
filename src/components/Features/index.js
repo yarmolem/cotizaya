@@ -37,39 +37,17 @@ const FeaturesItem = ({ slide = SLIDES[0], onClick }) => {
 }
 
 const Features = () => {
-  const { nroSlides } = useBreakPoint()
-  const [actualSlide, setActualSlide] = useState(0)
-
-  useEffect(() => {
-    setActualSlide(1)
-  }, [nroSlides])
-
-  // const updateSlide = ({ currentSlide }) => {
-  //   setActualSlide(currentSlide)
-  // }
-
-  const handleNext = () => {
-    if (actualSlide === SLIDES.length) return
-    if (nroSlides === SLIDES.length) return
-    setActualSlide((a) => a + 1)
-  }
+  const { nroSlides } = useBreakPoint({ max: 5 })
 
   return (
     <div>
-      {
-        <Swiper
-          spaceBetween={20}
-          slidesPerView={nroSlides}
-          onSwiper={(swiper) => console.log(swiper)}
-          onSlideChange={() => console.log('slide change')}
-        >
-          {SLIDES.map((slide, i) => (
-            <SwiperSlide key={`slide-${i}`}>
-              <FeaturesItem {...{ slide, onClick: handleNext }} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      }
+      <Swiper spaceBetween={20} slidesPerView={nroSlides}>
+        {SLIDES.map((slide, i) => (
+          <SwiperSlide key={`slide-${i}`}>
+            <FeaturesItem {...{ slide }} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
   )
 }

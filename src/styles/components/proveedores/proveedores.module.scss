@@ -1,7 +1,18 @@
+@import '@/styles/mixins';
 @import '@/styles/variables';
 
 .proveedores {
   padding-block: 2rem;
+
+  &_grid {
+    display:grid;
+    gap: 2rem;
+    align-items:center;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 300px;
+
+    margin-bottom: 5rem;
+  }
 
   &_slogan {
     font-weight: 700;
@@ -10,12 +21,22 @@
   }
 
   &_bread {
+    max-height:30px;
     display: flex;
     font-size: 16px;
     margin-bottom: 1em;
     // font-weight: bold;
     justify-content: center;
     text-transform: uppercase;
+
+    @include break_md {
+      font-size: 20px;
+      justify-content: flex-start;
+    }
+
+    @include break_lg {
+      margin-block: 3rem;
+    }
 
     a {
       color: $dark;
@@ -27,19 +48,23 @@
     }
 
     svg {
-      fill: $primary-500;
       width: 10px;
+      fill: $primary-500;
       margin-inline: 1rem;
     }
   }
 
   &_categoria {
-
     height: 40vw;
     overflow: hidden;
+    max-height: 170px;
     position: relative;
     border-radius: 10px;
     margin-bottom: 2rem;
+
+    @include break_lg {
+      max-height: 100%;
+    }
 
     & > div {
       z-index: 3;
@@ -50,6 +75,10 @@
       right: 0;
       bottom: 0;
       transform: translateY(110%);
+
+      @include break_lg {
+        transform: translateY(250%);
+      }
     }
 
     h3,
@@ -78,6 +107,7 @@
   }
 
   &_slideritem {
+    margin-bottom: 2rem;
 
     img {
       max-width: 100%;
@@ -110,5 +140,12 @@
         }
       }
     }
+  }
+
+  &_mostrar {
+    margin-top: 3rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 }
