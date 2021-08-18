@@ -1,17 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/dist/client/router'
 
-// hooks
-import { useCotizador } from '@/hooks/useCotizador'
+// components
+import Select from '../Select'
 
-// data
+// utils
+import Check from '@/svg/Check'
 import { brands } from '@/data/cars'
+import { useCotizador } from '@/hooks/useCotizador'
 
 // styles
 import styles from './cotizador.module.scss'
-import Check from '@/svg/Check'
-import Select from '../Select'
 
 const Cotizador = () => {
+  const router = useRouter()
   const { form, motors, models, setForm, handleChange } = useCotizador()
 
   const isActive = (bool) => {
@@ -45,7 +47,14 @@ const Cotizador = () => {
         className={styles.cotizador_form}
         onSubmit={(e) => {
           e.preventDefault()
-          console.log(form)
+          router.push({
+            pathname: '/proveedores',
+            query: {
+              marca: form.brand,
+              modelo: form.model,
+              motor: form.motor
+            }
+          })
         }}
       >
         {/* marcas */}
@@ -54,7 +63,6 @@ const Cotizador = () => {
           <Select
             name="brand"
             value={form.brand}
-            // style={{ paddingLeft: isModelActive ? '5rem' : '' }}
             className={isModelActive ? styles.select_active : ''}
             onChange={(e) => {
               handleChange(e)
@@ -75,7 +83,6 @@ const Cotizador = () => {
           <Select
             name="model"
             value={form.model}
-            // style={{ paddingLeft: isMotorActive ? '5rem' : '' }}
             className={isMotorActive ? styles.select_active : ''}
             onChange={(e) => {
               handleChange(e)
@@ -99,7 +106,6 @@ const Cotizador = () => {
             name="motor"
             value={form.motor}
             onChange={handleChange}
-            // style={{ paddingLeft: form.motor !== '' ? '5rem' : '' }}
             className={form.motor !== '' ? styles.select_active : ''}
           >
             <option value="1">Ingresa el motor</option>
