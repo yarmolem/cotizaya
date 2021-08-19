@@ -18,7 +18,7 @@ import styles from '@/styles/components/proveedores/proveedores.module.scss'
 const Proveedores = () => {
   const [isMobile, setIsMobile] = useState(false)
   const { nroSlides } = useBreakPoint({ max: 4 })
-  const [nroCategorias, setNroCategorias] = useState(1)
+  const [nroCategorias, setNroCategorias] = useState(5)
   const { params } = useParams({
     motor: '',
     marca: '',
