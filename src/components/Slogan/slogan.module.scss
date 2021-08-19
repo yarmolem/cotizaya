@@ -1,0 +1,30 @@
+@import '@/styles/mixins';
+@import '@/styles/variables';
+
+.slogan {
+  margin-block: 2rem;
+
+  h1 {
+    margin: 0;
+    font-size: 18px;
+    margin-block: 1em;
+    text-align: center;
+    font-family: RobotoBlack;
+
+    @include break_lg {
+      font-size: 20px;
+    }
+    @include break_xl {
+      font-size: 24px;
+    }
+  }
+
+  div {
+    display: block;
+    margin: 0 auto;
+    height: 10px;
+    width: 95%;
+    background-color: $primary;
+    border: 1px solid $secundary;
+  }
+}

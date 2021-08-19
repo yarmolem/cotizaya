@@ -3,13 +3,12 @@
 $size_bars: 35px;
 
 .navbar {
+  padding: 1rem;
   z-index: 1300;
   position: sticky;
   top: 0;
   display: grid;
-  padding: 0 2rem;
   align-items: center;
-  // background-color: $primary;
   background: linear-gradient(160deg, rgba(255,222,0,1) 0%, rgba(230,176,0,1) 100%);
   grid-template-columns: 40px 1fr 40px;
 
@@ -23,8 +22,8 @@ $size_bars: 35px;
   }
 
   img {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     margin: 0 auto;
   }
 }

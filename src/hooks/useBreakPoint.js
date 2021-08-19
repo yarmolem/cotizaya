@@ -7,7 +7,7 @@ const initialState = {
   xl: false
 }
 
-export const useBreakPoint = ({ max = 5 }) => {
+export const useBreakPoint = ({ sm = 1, md = 2, lg = 3, xl = 5 }) => {
   const [nroSlides, setNroSlides] = useState(1)
   const [breakpoints, setBreakpoints] = useState(initialState)
 
@@ -34,10 +34,10 @@ export const useBreakPoint = ({ max = 5 }) => {
   }, [])
 
   useEffect(() => {
-    if (breakpoints.sm) setNroSlides(1)
-    if (breakpoints.md) setNroSlides(2)
-    if (breakpoints.lg) setNroSlides(3)
-    if (breakpoints.xl) setNroSlides(max)
+    if (breakpoints.sm) setNroSlides(sm)
+    if (breakpoints.md) setNroSlides(md)
+    if (breakpoints.lg) setNroSlides(lg)
+    if (breakpoints.xl) setNroSlides(xl)
   }, [breakpoints])
 
   function query(br) {
