@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 
 // terceros
+import SwiperCore, { Navigation } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 // utils
@@ -15,6 +16,9 @@ import { useBreakPoint } from '@/hooks/useBreakPoint'
 // styles
 import styles from '@/styles/components/proveedores/proveedores.module.scss'
 import Slogan from '@/components/Slogan'
+import Store from '@/svg/Store'
+
+SwiperCore.use([Navigation])
 
 const Proveedores = () => {
   const [nroCategorias, setNroCategorias] = useState(5)
@@ -50,9 +54,12 @@ const Proveedores = () => {
             <a>INICIO</a>
           </Link>
           <ChevronRight />
-          <a href="#">{params.marca}</a>
+          {/* {logo} */}
+          <a href="#"><img src="/images/volkswagen.jpg" alt="" /></a>
           <ChevronRight />
-          {params.modelo}
+          <a href="#">{params.marca} {params.modelo}</a>
+          <ChevronRight />
+          <a href="#">Listado de tiendas</a>
         </div>
 
         {/* eslint-disable */}
@@ -71,12 +78,12 @@ const Proveedores = () => {
                 </div>
 
                 <img
+                  alt=""  
                   src="https://cdn.motordoctor.de/thumb/assets/bvs/ersatz_categories/300x300/67.png"
-                  alt=""
                 />
               </div>
               <div className={styles.proveedores_categoriaslider}>
-                <Swiper spaceBetween={20} slidesPerView={nroSlides}>
+                <Swiper spaceBetween={20} slidesPerView={5} navigation>
                   {Array(10)
                     .fill(null)
                     .map((_, i) => (
@@ -85,19 +92,21 @@ const Proveedores = () => {
                           <img src="/images/tienda.jpg" alt="" />
 
                           <div>
-                            <button className="btn btn-outline-primary">
-                              <Home />
-                              <span>Contactar tienda</span>
+                            <button className="btn">
+                            <Store />
+                              <span>Ver tienda</span>
                             </button>
-                            <button className="btn btn-primary">
+                            {/* <button className="btn btn-primary">
                               <Whatsapp />
                               <span>Escríbele</span>
-                            </button>
+                            </button> */}
                           </div>
                         </div>
                       </SwiperSlide>
                     ))}
                 </Swiper>
+
+                <button style={{ marginTop: '5rem' }}  className="btn btn-secundary">Ver mas</button>
               </div>
             </div>
           ))}

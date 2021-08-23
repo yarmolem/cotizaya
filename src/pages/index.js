@@ -11,7 +11,7 @@ import Slogan from '@/components/Slogan'
 
 const Home = () => {
   return (
-    <div className="container">
+    <div>
       <Head>
         <title>Cotizaya | inicio</title>
         <link rel="icon" href="/favicon.ico" />
@@ -19,13 +19,15 @@ const Home = () => {
       </Head>
       <Slogan />
 
-      <div className={styles.hero}>
-        <div className={styles.hero_flex}>
-          <Cotizador />
-          <Presentation />
+      <div className="container">
+        <div className={styles.hero}>
+          <div className={styles.hero_flex}>
+            <Cotizador />
+            <Presentation />
+          </div>
         </div>
+        <Features />
       </div>
-      <Features />
     </div>
   )
 }

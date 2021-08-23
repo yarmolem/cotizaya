@@ -208,6 +208,41 @@ input[type='button'].btn-primary:focus {
     border-color: $gray;
   }
 }
+.btn.btn-secundary,
+input[type='reset'].btn-secundary,
+input[type='submit'].btn-secundary,
+input[type='button'].btn-secundary {
+  color: white;
+  border-color: $secundary;
+  background: $secundary;
+
+  transition: all 0.3s ease-in;
+
+  &:disabled {
+    color: $letter-gray;
+    background: $gray;
+    border-color: $gray;
+    cursor: not-allowed;
+  }
+}
+.btn.btn-secundary:hover,
+input[type='reset'].btn-secundary:hover,
+input[type='submit'].btn-secundary:hover,
+input[type='button'].btn-secundary:hover,
+.btn.btn-secundary:focus,
+input[type='reset'].btn-secundary:focus,
+input[type='submit'].btn-secundary:focus,
+input[type='button'].btn-secundary:focus {
+  color: white;
+  border-color: lighten($color: $secundary, $amount: 20);
+  background-color: lighten($color: $secundary, $amount: 20);
+
+  &:disabled {
+    color: $letter-gray;
+    background: $gray;
+    border-color: $gray;
+  }
+}
 
 .btn.btn-outline-primary,
 input[type='reset'].btn-outline-primary,

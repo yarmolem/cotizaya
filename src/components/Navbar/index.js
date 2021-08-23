@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 // styles
 import styles from './navbar.module.scss'
 
@@ -22,7 +24,11 @@ const Navbar = ({ onOpen = () => {} }) => {
         </svg>
       </button>
 
-      <img src="/logo/logo.svg" alt="Logo Cotiza ya" />
+      <Link href="/">
+        <a>
+          <img src="/logo/logo.svg" alt="Logo Cotiza ya" />
+        </a>
+      </Link>
     </div>
   )
 }

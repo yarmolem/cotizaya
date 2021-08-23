@@ -7,9 +7,9 @@
   h1 {
     margin: 0;
     font-size: 18px;
-    margin-block: 1em;
     text-align: center;
-    font-family: RobotoBlack;
+    margin-block: 0.5em;
+    font-family: Roboto;
 
     @include break_lg {
       font-size: 20px;
