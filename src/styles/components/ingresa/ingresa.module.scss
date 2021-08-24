@@ -1,0 +1,93 @@
+@import '../../mixins';
+@import '../../variables';
+
+.ingresa,
+.registrate {
+  padding-block: 2rem;
+
+  @include break_md {
+    padding-block: 3rem;
+  }
+
+  h3 {
+    // margin: 0;
+    margin-bottom: 3rem;
+    text-align: left;
+    font-size: 1.8rem;
+    
+    @include break_md {
+      font-size: 2.5rem;
+      margin-bottom: 5rem;
+    }
+  }
+
+  &_form {
+    gap: 3rem;
+    display: grid;
+    max-width: 600px;
+
+    @include break_md {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    button[type="submit"] {
+      @include break_md {
+        margin-top: 2rem;
+      }
+    }
+  }
+}
+
+.input {
+  position: relative;
+
+  button {
+    right: 0;
+    top: 10px;
+    width: 40px;
+    fill: gray;
+    position: absolute;
+  }
+
+  input {
+    border: 0;
+    width: 100%;
+    height: 50px;
+    line-height: 5px;
+    border-radius: 0;
+    border-bottom: 1px solid gray;
+
+    transition: border 0.3s linear;
+
+    &:focus {
+      border: 0;
+      border-bottom: 1px solid $primary;
+    }
+
+    &:focus + label {
+      top: -10px;
+      left: 0px;
+    }
+  }
+
+  label {
+    top: 14px;
+    left: 10px;
+    color: gray;
+    position: absolute;
+    font-weight: 500;
+
+    transition: all 100ms linear;
+  }
+}
+
+.filled  {
+  input  {
+    border-bottom: 1px solid $primary;
+    
+    & + label { 
+      top: -10px;
+      left: 0px;
+    }
+  }
+}

@@ -1,11 +1,14 @@
 import '@fontsource/roboto'
 import '@/styles/styles.scss'
-import 'react-slidy/lib/index.scss'
-import 'swiper/swiper-bundle.min.css'
+
+// terceros
+import { ToastContainer } from 'react-toastify'
 
 // components
 import Navbar from '@/components/Navbar'
 import Sidebar from '@/components/Sidebar'
+
+// utils
 import useDisclosure from '@/hooks/useDisclosure'
 
 const MyApp = ({ Component, pageProps }) => {
@@ -16,6 +19,7 @@ const MyApp = ({ Component, pageProps }) => {
       <Navbar {...{ onOpen }} />
       <Sidebar {...{ isOpen, onClose }} />
       <Component {...pageProps} />
+      <ToastContainer />
     </div>
   )
 }

@@ -67,21 +67,21 @@ const Sidebar = ({ isOpen = false, onClose }) => {
             </Link>
           </li>
           <li>
-            <Link href="/">
+            <Link href="/ingresa">
               <a onClick={onClose}>
                 <User /> Ingresa
               </a>
             </Link>
           </li>
           <li>
-            <Link href="/">
+            <Link href="/registrate">
               <a onClick={onClose}>
                 <List /> Regístrate
               </a>
             </Link>
           </li>
           <li>
-            <Link href="/">
+            <Link href="/registra-tu-tienda">
               <a onClick={onClose}>
                 <Store /> Registra tu tienda
               </a>

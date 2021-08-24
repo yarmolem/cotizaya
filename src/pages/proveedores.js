@@ -6,23 +6,23 @@ import Link from 'next/link'
 import SwiperCore, { Navigation } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
+// components
+import Slogan from '@/components/Slogan'
+
 // utils
-import Home from '@/svg/Home'
-import Whatsapp from '@/svg/Whatsapp'
+import Store from '@/svg/Store'
 import useParams from '@/hooks/useParams'
 import ChevronRight from '@/svg/ChevronRight'
 import { useBreakPoint } from '@/hooks/useBreakPoint'
 
 // styles
 import styles from '@/styles/components/proveedores/proveedores.module.scss'
-import Slogan from '@/components/Slogan'
-import Store from '@/svg/Store'
 
 SwiperCore.use([Navigation])
 
 const Proveedores = () => {
   const [nroCategorias, setNroCategorias] = useState(5)
-  const { nroSlides } = useBreakPoint({ sm: 1, md: 1, lg: 2, xl: 3 })
+  const { nroSlides } = useBreakPoint({ xs: 2, sm: 2, md: 2, lg: 3, xl: 5 })
   const { params } = useParams({
     motor: '',
     marca: '',
@@ -50,107 +50,72 @@ const Proveedores = () => {
         </h3>
 
         <div className={styles.proveedores_bread}>
-          <Link href="/">
-            <a>INICIO</a>
-          </Link>
-          <ChevronRight />
-          {/* {logo} */}
-          <a href="#"><img src="/images/volkswagen.jpg" alt="" /></a>
-          <ChevronRight />
-          <a href="#">{params.marca} {params.modelo}</a>
-          <ChevronRight />
-          <a href="#">Listado de tiendas</a>
+          <div>
+            <Link href="/">
+              <a>INICIO</a>
+            </Link>
+            <ChevronRight />
+            {/* {logo} */}
+            <a href="#">
+              <img src="/images/volkswagen.jpg" alt="" />
+            </a>
+            <ChevronRight />
+            <a href="#">
+              {params.marca} {params.modelo}
+            </a>
+            <ChevronRight />
+            <a href="#">Listado de tiendas</a>
+          </div>
         </div>
 
-        {/* eslint-disable */}
-        <>
-          {/* Resultados para mobile */}
           {categorias.map((_, i) => (
             <div
               key={`categoria-${i}`}
               className={styles.proveedores_categoria}
             >
               <div className={styles.proveedores_categoriainfo}>
+                {/* START TITULO EN DESKTOP */}
                 <div>
                   <h3>Reparo de motor</h3>
-
                   <p>para {params.modelo}</p>
                 </div>
+                {/* END TITULO EN DESKTOP */}
 
                 <img
-                  alt=""  
+                  alt=""
                   src="https://cdn.motordoctor.de/thumb/assets/bvs/ersatz_categories/300x300/67.png"
                 />
               </div>
               <div className={styles.proveedores_categoriaslider}>
-                <Swiper spaceBetween={20} slidesPerView={5} navigation>
+                {/* START TITULO EN MOBILE */}
+                <div>
+                  <h3>Reparo de motor</h3>
+                  <p>para {params.modelo}</p>
+                </div>
+                {/* END TITULO EN MOBILE */}
+
+                <Swiper spaceBetween={20} slidesPerView={nroSlides} navigation>
                   {Array(10)
                     .fill(null)
                     .map((_, i) => (
                       <SwiperSlide key={`proveedores-${i}`}>
                         <div className={styles.proveedores_slideritem}>
                           <img src="/images/tienda.jpg" alt="" />
-
                           <div>
                             <button className="btn">
-                            <Store />
+                              <Store />
                               <span>Ver tienda</span>
                             </button>
-                            {/* <button className="btn btn-primary">
-                              <Whatsapp />
-                              <span>Escríbele</span>
-                            </button> */}
                           </div>
                         </div>
                       </SwiperSlide>
                     ))}
                 </Swiper>
 
-                <button style={{ marginTop: '5rem' }}  className="btn btn-secundary">Ver mas</button>
+                <button className="btn btn-secundary">Ver mas</button>
               </div>
             </div>
           ))}
-        </>
-        <>
-          {/* Resultados para desk */}
-          {[].map((_, i) => (
-            <div className={styles.proveedores_grid} key={`categoria-${i}`}>
-              <div className={styles.proveedores_categoria}>
-                <div>
-                  <h3>Reparo de motor</h3>
-
-                  <p>
-                    para {params.marca} {params.modelo}
-                  </p>
-                </div>
-
-                <img src="/images/image1.jpg" alt="" />
-              </div>
-              {Array(8)
-                .fill(null)
-                .map((_, i) => (
-                  <SwiperSlide key={`proveedores-${i}`}>
-                    <div className={styles.proveedores_slideritem}>
-                      <img src="/images/tienda.jpg" alt="" />
-
-                      <div>
-                        <button className="btn btn-outline-primary">
-                          <Home /> Contactar tienda
-                        </button>
-                        <button className="btn btn-primary">
-                          <Whatsapp /> Escríbele
-                        </button>
-                      </div>
-                    </div>
-                  </SwiperSlide>
-                ))}
-            </div>
-          ))}
-        </>
-
-        {/* eslint-enable */}
-
-        {/* Resultados para desktop > 992px */}
 
         <div onClick={handleMore} className={styles.proveedores_mostrar}>
           <button className="btn btn-primary">Mostrar mas</button>

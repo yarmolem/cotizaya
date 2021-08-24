@@ -1,3 +1,10 @@
 @import './reset';
 @import './fonts';
 @import './globals';
+
+@import '~react-slidy/lib/index.scss';
+@import '~swiper/swiper-bundle.min.css';
+@import '~react-toastify/dist/ReactToastify.css';
+
+@import './overrides';
+

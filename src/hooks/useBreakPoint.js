@@ -7,8 +7,8 @@ const initialState = {
   xl: false
 }
 
-export const useBreakPoint = ({ sm = 1, md = 2, lg = 3, xl = 5 }) => {
-  const [nroSlides, setNroSlides] = useState(1)
+export const useBreakPoint = ({ xs = 1, sm = 1, md = 2, lg = 3, xl = 5 }) => {
+  const [nroSlides, setNroSlides] = useState(xs)
   const [breakpoints, setBreakpoints] = useState(initialState)
 
   useEffect(() => {
