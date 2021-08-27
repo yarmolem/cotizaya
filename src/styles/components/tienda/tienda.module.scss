@@ -1,20 +1,11 @@
 @import '@/styles/mixins';
 @import '@/styles/variables';
 
-.proveedores {
+.tienda {
   width: 95%;
   margin: 0 auto;
   max-width: 1200px;
   padding-block: 2rem;
-
-  &_grid {
-    gap: 2rem;
-    display:grid;
-    align-items:center;
-    grid-auto-rows: 300px;
-    grid-template-columns: repeat(3, 1fr);
-    margin-bottom: 5rem;
-  }
 
   &_slogan {
     font-size: 16px;
@@ -81,105 +72,17 @@
     display: grid;
     max-width: 100vw;
     gap: 1rem;
-    // align-items: center;
     margin-bottom: 2rem;
     border: 1px solid #e2e2e2;
     background-color: #f4f4f4;
     grid-template-columns: 1fr;
-    
 
-    @include break_md {
-      grid-template-columns: 300px 1fr;
-    }
+    & > div:nth-child(1) {
+      z-index: 3;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      background-color: $primary;
 
-    &slider {
-      display: block;
-      margin:  0 auto;
-      max-width: 90vw;
-      // padding-block: 2rem;
-      justify-self: center;
-
-      @include break_md {
-        max-width: 50vw;
-        padding-top: 2rem;
-      }
-
-      @include break_lg {
-        max-width: 600px;
-      }
-      @include break_xl {
-        max-width: 850px;
-      }
-
-      img {
-        max-width: 90%;
-      }
-
-      & > div:nth-child(1) {
-        z-index: 3;
-        padding: 1rem;
-        margin-bottom: 2rem;
-        width: 100%;
-        transform: translateX(-10px);
-        background-color: $primary;
-
-        @include break_md {
-          display: none;
-        }
-
-        h3,
-        p {
-          margin: 0;
-          text-align: center;
-        }
-    
-        h3 {
-          font-size: 18px;
-          font-weight: bold;
-          line-height: 20px;
-          letter-spacing: 0.3px;
-        }
-    
-        p {
-          font-size:12px;
-        }
-      }
-
-      & > button {
-        
-        width: 100%;
-        display: block;
-        margin-top: 2rem;
-        
-        @include break_md {
-          width: max-content;
-          margin-top: 6.5rem;
-        }
-      }
-    }
-
-    &info {
-      display: none;
-      border-right: 1px solid #e2e2e2;
-      overflow: hidden;
-      position: relative;
-      background: white;
-      padding-bottom: 2rem;
-
-      @include break_md {
-        display: block;
-      }
-      
-      @include break_lg {
-        max-height: 100%;
-      }
-      
-      & > div {
-        z-index: 3;
-        padding: 1rem;
-        background-color: $primary-400;
-      }
-  
       h3,
       p {
         margin: 0;
@@ -195,15 +98,6 @@
   
       p {
         font-size:12px;
-      }
-  
-      img {
-        padding-block: 3rem;
-        z-index: 2;
-        display: block;
-        margin: 0 auto;
-        max-width: 50%;
-        object-fit: contain;
       }
     }
   }
@@ -259,19 +153,27 @@
 }
 
 .slider_mobile {
-  display: grid;
   gap: 2rem;
+  display: grid;
+  margin-inline: 1rem;
+  margin-bottom: 1rem;
   grid-template-columns: 1fr 1fr;
-
-  @include break_md {
-    display: none;
-  }
 }
 
-.slider_desktop {
-  display: none;
+.paginacion {
+  margin: 0 auto;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  width: max-content;
+  // background-color: #e2e2e2;
 
-  @include break_md {
-    display: block;
+  span {
+    padding: 1rem 1.5rem;
+    background-color: #e2e2e2;
+  }
+
+  a {
+    color: blue;
+    margin-left: 2rem;
   }
 }

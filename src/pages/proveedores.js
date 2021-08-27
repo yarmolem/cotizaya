@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 // terceros
 import SwiperCore, { Navigation } from 'swiper'
@@ -21,6 +22,7 @@ import styles from '@/styles/components/proveedores/proveedores.module.scss'
 SwiperCore.use([Navigation])
 
 const Proveedores = () => {
+  const router = useRouter()
   const [nroCategorias, setNroCategorias] = useState(5)
   const { nroSlides } = useBreakPoint({ xs: 2, sm: 2, md: 2, lg: 3, xl: 5 })
   const { params } = useParams({
@@ -30,6 +32,11 @@ const Proveedores = () => {
   })
 
   const handleMore = () => setNroCategorias((c) => c + 1)
+
+  const brandLogo = (brand) => {
+    if (brand === 'Volkswagen') return '/images/volkswagen.jpg'
+    if (brand === 'Mercedes Benz') return '/images/mercedes.png'
+  }
 
   const categorias = Array(nroCategorias).fill(null)
 
@@ -57,7 +64,7 @@ const Proveedores = () => {
             <ChevronRight />
             {/* {logo} */}
             <a href="#">
-              <img src="/images/volkswagen.jpg" alt="" />
+              <img src={brandLogo(params.marca)} alt="" />
             </a>
             <ChevronRight />
             <a href="#">
@@ -68,32 +75,49 @@ const Proveedores = () => {
           </div>
         </div>
 
-          {categorias.map((_, i) => (
-            <div
-              key={`categoria-${i}`}
-              className={styles.proveedores_categoria}
-            >
-              <div className={styles.proveedores_categoriainfo}>
-                {/* START TITULO EN DESKTOP */}
-                <div>
-                  <h3>Reparo de motor</h3>
-                  <p>para {params.modelo}</p>
-                </div>
-                {/* END TITULO EN DESKTOP */}
-
-                <img
-                  alt=""
-                  src="https://cdn.motordoctor.de/thumb/assets/bvs/ersatz_categories/300x300/67.png"
-                />
+        {categorias.map((_, i) => (
+          <div key={`categoria-${i}`} className={styles.proveedores_categoria}>
+            <div className={styles.proveedores_categoriainfo}>
+              {/* START TITULO EN DESKTOP */}
+              <div>
+                <h3>Reparo de motor</h3>
+                <p>para {params.modelo}</p>
               </div>
-              <div className={styles.proveedores_categoriaslider}>
-                {/* START TITULO EN MOBILE */}
-                <div>
-                  <h3>Reparo de motor</h3>
-                  <p>para {params.modelo}</p>
-                </div>
-                {/* END TITULO EN MOBILE */}
+              {/* END TITULO EN DESKTOP */}
 
+              <img
+                alt=""
+                src="https://cdn.motordoctor.de/thumb/assets/bvs/ersatz_categories/300x300/67.png"
+              />
+            </div>
+            <div className={styles.proveedores_categoriaslider}>
+              {/* START TITULO EN MOBILE */}
+              <div>
+                <h3>Reparo de motor</h3>
+                <p>para {params.modelo}</p>
+              </div>
+              {/* END TITULO EN MOBILE */}
+
+              <div className={styles.slider_mobile}>
+                {Array(6)
+                  .fill(null)
+                  .map((_, i) => (
+                    <div
+                      key={`proveedores-${i}`}
+                      className={styles.proveedores_slideritem}
+                    >
+                      <img src="/images/tienda.jpg" alt="" />
+                      <div>
+                        <button className="btn">
+                          <Store />
+                          <span>Ver tienda</span>
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+
+              <div className={styles.slider_desktop}>
                 <Swiper spaceBetween={20} slidesPerView={nroSlides} navigation>
                   {Array(10)
                     .fill(null)
@@ -111,11 +135,26 @@ const Proveedores = () => {
                       </SwiperSlide>
                     ))}
                 </Swiper>
-
-                <button className="btn btn-secundary">Ver mas</button>
               </div>
+
+              <button
+                onClick={() => {
+                  router.push({
+                    pathname: '/tienda/1',
+                    query: {
+                      marca: params.marca,
+                      modelo: params.modelo,
+                      motor: params.motor
+                    }
+                  })
+                }}
+                className="btn btn-secundary"
+              >
+                Ver mas
+              </button>
             </div>
-          ))}
+          </div>
+        ))}
 
         <div onClick={handleMore} className={styles.proveedores_mostrar}>
           <button className="btn btn-primary">Mostrar mas</button>

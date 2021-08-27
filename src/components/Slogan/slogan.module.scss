@@ -20,11 +20,11 @@
   }
 
   div {
+    width: 95%;
+    height: 10px;
     display: block;
     margin: 0 auto;
-    height: 10px;
-    width: 95%;
-    background-color: $primary;
     border: 1px solid $secundary;
+    background-color: $primary-400;
   }
 }

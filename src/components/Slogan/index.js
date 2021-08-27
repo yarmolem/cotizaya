@@ -6,7 +6,7 @@ const Slogan = () => {
       <div />
 
       <h1>
-        EN COTIZAYA DESCUBRIRÁS A TODOS LOS PROVEEDORES DE REPUESTOS DEL PERÚ.
+        EN PIMQER DESCUBRIRÁS A TODOS LOS PROVEEDORES DE REPUESTOS DEL PERÚ.
         ¡COMIENZA AHORA!
       </h1>
 
