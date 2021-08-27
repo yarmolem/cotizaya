@@ -158,6 +158,10 @@
   margin-inline: 1rem;
   margin-bottom: 1rem;
   grid-template-columns: 1fr 1fr;
+
+  @include break_lg {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .paginacion {
