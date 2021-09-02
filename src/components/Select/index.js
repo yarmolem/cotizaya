@@ -4,7 +4,7 @@ import styles from './select.module.scss'
 
 const Select = (props) => {
   return (
-    <div className={styles.select}>
+    <div className={`${styles.select} ${props.className}`}>
       <select {...props}>{props.children}</select>
       <svg
         aria-hidden="true"

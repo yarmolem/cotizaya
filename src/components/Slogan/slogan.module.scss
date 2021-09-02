@@ -2,14 +2,20 @@
 @import '@/styles/variables';
 
 .slogan {
-  margin-block: 2rem;
+  margin-top: 2rem;
+  
+  @include break_sm {
+    margin-top: 0rem;
+    margin-block: 2rem;
+  }
 
   h1 {
     margin: 0;
-    font-size: 18px;
+    font-size: 16px;
     text-align: center;
-    margin-block: 0.5em;
     font-family: Roboto;
+    margin-block: 0.5em;
+
 
     @include break_lg {
       font-size: 20px;
@@ -22,9 +28,13 @@
   div {
     width: 95%;
     height: 10px;
-    display: block;
+    display: none;
     margin: 0 auto;
     border: 1px solid $secundary;
     background-color: $primary-400;
+
+    @include break_sm {
+      display: block;
+    }
   }
 }

@@ -26,7 +26,7 @@ const Navbar = ({ onOpen = () => {} }) => {
 
       <Link href="/">
         <a>
-          <img src="/logo/logo.svg" alt="Logo Cotiza ya" />
+          <img src="/logo/logo-isotipo.svg" alt="Logo Cotiza ya" />
         </a>
       </Link>
     </div>

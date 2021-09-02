@@ -56,7 +56,7 @@ const Sidebar = ({ isOpen = false, onClose }) => {
         >
           X
         </button>
-        <img width={157} height={48} src="/logo/logo.svg" alt="Logo Cotizaya" />
+        <img width={157} height={48} src="/logo/logo-nombre.svg" alt="Logo Cotizaya" />
 
         <ul className={styles.sidebar_links}>
           <li>

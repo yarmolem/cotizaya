@@ -3,12 +3,12 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 
 // utils
+import Eye from '@/svg/Eye'
+import SlashEye from '@/svg/SlashEye'
 import { useForm } from '@/hooks/useForm'
 
 // styles
 import styles from '@/styles/components/ingresa/ingresa.module.scss'
-import Eye from '@/svg/Eye'
-import SlashEye from '@/svg/SlashEye'
 
 const Ingresa = () => {
   const router = useRouter()

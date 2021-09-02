@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import router from 'next/router'
 
 // utils
 import Store from '@/svg/Store'
@@ -19,6 +20,16 @@ const Tienda = () => {
   const brandLogo = (brand) => {
     if (brand === 'Volkswagen') return '/images/volkswagen.jpg'
     if (brand === 'Mercedes Benz') return '/images/mercedes.png'
+  }
+
+  const handleDetailStore = (tienda) => {
+    router.push({
+      pathname: '/detalle-tienda',
+      query: {
+        ...params,
+        tienda
+      }
+    })
   }
 
   return (
@@ -66,7 +77,7 @@ const Tienda = () => {
                 <div key={`tiendas-${i}`} className={styles.tienda_slideritem}>
                   <img src="/images/tienda.jpg" alt="" />
                   <div>
-                    <button className="btn">
+                    <button onClick={() => handleDetailStore('Agepsa')} className="btn">
                       <Store />
                       <span>Ver tienda</span>
                     </button>

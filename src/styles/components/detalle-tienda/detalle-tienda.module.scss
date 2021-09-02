@@ -1,0 +1,75 @@
+@import '@/styles/mixins';
+@import '@/styles/variables';
+
+.detalleTienda {
+  padding-top: 4rem;
+  width: 90%;
+  margin: 0 auto;
+  max-width: 1200px;
+
+  &_title {
+    margin: 0;
+    font-size: 16px;
+    font-family: Roboto;
+    margin-block: 2rem;
+
+    @include break_lg {
+      font-size: 20px;
+    }
+    @include break_xl {
+      font-size: 24px;
+    }
+
+    span {
+      font-family: RobotoBold;
+    }
+  }
+}
+
+.select {
+  @include break_md {
+    display: none;
+  }
+}
+
+.content {
+  margin-top: 2rem;
+}
+
+.tabs {
+  display: none;
+  
+  @include break_md {
+    display: flex;
+    align-items: center;
+  }
+  
+  &_item {
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 16px;
+    font-family: RobotoBold;
+    display: flex;
+    align-items: center;
+    background: transparent;
+    color: $letter-gray;
+    cursor: pointer;
+    margin-right: 1rem;
+
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #323232;
+    }
+
+    span {
+      margin-right: 1rem;
+    }
+
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
+}

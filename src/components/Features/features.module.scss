@@ -27,20 +27,9 @@
     }
 
     h3 {
-      font-size: 2.5rem;
       font-weight: 600;
+      font-size: 1.7rem;
       white-space: normal;
-
-
-      @include break_sm {
-        font-size: 2.5rem;
-      }
-      @include break_md {
-        font-size: 2.3rem;
-      }
-      @include break_lg {
-        font-size: 1.7rem;
-      }
     }
   }
 

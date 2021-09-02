@@ -31,6 +31,16 @@ const Proveedores = () => {
     modelo: ''
   })
 
+  const handleDetailStore = (tienda) => {
+    router.push({
+      pathname: '/detalle-tienda',
+      query: {
+        ...params,
+        tienda
+      }
+    })
+  }
+
   const handleMore = () => setNroCategorias((c) => c + 1)
 
   const brandLogo = (brand) => {
@@ -108,7 +118,7 @@ const Proveedores = () => {
                     >
                       <img src="/images/tienda.jpg" alt="" />
                       <div>
-                        <button className="btn">
+                        <button onClick={() => handleDetailStore('Agepsa')} className="btn">
                           <Store />
                           <span>Ver tienda</span>
                         </button>
@@ -126,7 +136,7 @@ const Proveedores = () => {
                         <div className={styles.proveedores_slideritem}>
                           <img src="/images/tienda.jpg" alt="" />
                           <div>
-                            <button className="btn">
+                            <button onClick={() => handleDetailStore('Agepsa')} className="btn">
                               <Store />
                               <span>Ver tienda</span>
                             </button>

@@ -1,0 +1,125 @@
+@import '@/styles/mixins';
+@import '@/styles/variables';
+
+.sedes,
+.whatsapp,
+.cuentas, 
+.general,
+.correos {
+
+  h3 {
+    font-size: 20px;
+    font-family: RobotoBold;
+  }
+}
+
+.sedes {
+
+  h3 {
+    margin-left: 3rem;  
+  }
+
+  h4 {
+    margin: 0;
+    font-size: 16px;
+    margin-left: 3rem;
+    margin-bottom: 1rem;
+    color: $letter-gray;
+    font-family: RobotoBold;
+  }
+
+  span {
+    font-size: 14px;
+  }
+
+  ul {
+    margin-bottom: 3rem;
+
+    li {
+      list-style: none;
+      display: flex;
+
+      svg {
+        width: 20px;
+        height: 20px;
+        color: $primary;
+        margin-right: 1rem;
+      }
+    }
+  }
+}
+
+.whatsapp {
+
+  &_wrap {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &_item {
+    width: 100%;
+    display: flex;
+    padding: 1rem 2rem;
+    color: $letter-gray;
+
+    @include break_md {
+      max-width: 280px;
+      margin-right: 1rem;
+    }
+    
+
+    p {
+      margin: 0;
+    }
+
+    svg {
+      margin-right: 1rem;
+      width: 30px;
+      height: 30px;
+    }
+  }
+}
+
+.cuentas {
+  
+  &_flex {
+    display: flex;
+    flex-direction: column;
+
+    @include break_lg {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+  }
+
+  p {
+    color: $letter-gray;
+  }
+}
+
+.correos {
+
+  &_item {
+    display: flex;
+    align-items: center;
+     
+    svg {
+      width: 30px;
+      height: 30px;
+      margin-right: 1rem;
+    }
+
+    a {
+      color: cornflowerblue;
+    }
+  }
+}
+
+.general {
+
+  &_ruc {
+    color: $letter-gray;
+  }
+}
