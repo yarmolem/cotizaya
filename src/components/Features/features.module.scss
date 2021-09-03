@@ -34,20 +34,14 @@
   }
 
   button {
-    width: 80px;
-    min-width: 80px;
-    max-width: 80px;
+    width: 50px;
+    min-width: 50px;
+    max-width: 50px;
 
     @include break_sm {
-      width: 50px;
-      min-width: 50px;
-      max-width: 50px;
       margin-right: 5rem;
     }
     @include break_md {
-      margin-right: 0rem;
-    }
-    @include break_xl {
       margin-right: 0rem;
     }
 

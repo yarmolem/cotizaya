@@ -2,11 +2,15 @@
 @import '@/styles/variables';
 
 .slogan {
+  display: none;
   margin-top: 2rem;
   
   @include break_sm {
     margin-top: 0rem;
     margin-block: 2rem;
+  }
+  @include break_md {
+    display: block;
   }
 
   h1 {

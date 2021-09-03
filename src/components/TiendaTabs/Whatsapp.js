@@ -10,20 +10,35 @@ const Whatsapp = () => {
       <h3>NUESTROS ASESORES COMERCIALES TE ATENDERÁN DE INMEDIATO</h3>
 
       <div className={styles.whatsapp_wrap}>
-        <button className={`btn ${styles.whatsapp_item}`}>
+        <a
+          href="https://wa.me/999999999?text=MENSAJE%20DE%20PRUEBA"
+          target="_blank"
+          rel="noreferrer"
+          className={`btn ${styles.whatsapp_item}`}
+        >
           <WhatsappIcon />
           <p>Nelson Manrique</p>
-        </button>
+        </a>
 
-        <button className={`btn ${styles.whatsapp_item}`}>
+        <a
+          href="https://wa.me/999999999?text=MENSAJE%20DE%20PRUEBA"
+          target="_blank"
+          rel="noreferrer"
+          className={`btn ${styles.whatsapp_item}`}
+        >
           <WhatsappIcon />
           <p>Ariana Figueroa</p>
-        </button>
+        </a>
 
-        <button className={`btn ${styles.whatsapp_item}`}>
+        <a
+          href="https://wa.me/999999999?text=MENSAJE%20DE%20PRUEBA"
+          target="_blank"
+          rel="noreferrer"
+          className={`btn ${styles.whatsapp_item}`}
+        >
           <WhatsappIcon />
           <p>Fernando Gonzales</p>
-        </button>
+        </a>
       </div>
     </div>
   )

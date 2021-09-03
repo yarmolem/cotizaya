@@ -8,7 +8,7 @@ import Dot from '@/svg/Dot'
 // styles
 import styles from './presentation.module.scss'
 
-const SLIDES = ['NEUMATICO.jpg', 'MOTOR.jpg', 'Aceite.jpg']
+const SLIDES = ['NEUMATICO.jpg', 'MOTOR.jpg', 'ACEITES.jpg']
 
 const Presentation = () => {
   const [actualSlide, setActualSlide] = useState(0)
