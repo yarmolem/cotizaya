@@ -10,6 +10,11 @@
   @include break_lg {
     padding-top: 4rem;
   }
+  
+  &_mobile {
+    display: flex;
+    align-items: center;
+  }
 
   &_logoM {
     margin-bottom: 20px;
@@ -20,6 +25,9 @@
     
     img {
       width: 100%;
+      display: block;
+      margin: 0 auto;
+      max-width: 100px;
     }
   }
 

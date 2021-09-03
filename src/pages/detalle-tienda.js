@@ -48,23 +48,25 @@ const DetalleTienda = () => {
         TIENDA <span>{params.tienda.toUpperCase()}</span>
       </h1>
 
-      <div className={styles.detalleTienda_logoM}>
-        <img src="/images/tienda.jpg" alt="" />
-      </div>
+      <div className={styles.detalleTienda_mobile}>
+        {/* SELECT PARA MOBILE */}
+        <Select
+          name="options"
+          value={actualTab}
+          onChange={handleChange}
+          className={styles.select}
+        >
+          {Object.keys(tabs).map((tab) => (
+            <option key={`TABM-${tab}`} value={tab}>
+              {tab}
+            </option>
+          ))}
+        </Select>
 
-      {/* SELECT PARA MOBILE */}
-      <Select
-        name="options"
-        value={actualTab}
-        onChange={handleChange}
-        className={styles.select}
-      >
-        {Object.keys(tabs).map((tab) => (
-          <option key={`TABM-${tab}`} value={tab}>
-            {tab}
-          </option>
-        ))}
-      </Select>
+        <div className={styles.detalleTienda_logoM}>
+          <img src="/images/tienda.jpg" alt="" />
+        </div>
+      </div>
 
       {/* TABS PARA DESKTOP */}
       <div className={styles.tabs}>

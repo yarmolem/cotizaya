@@ -9,7 +9,7 @@ $size_bars: 35px;
   top: 0;
   display: grid;
   align-items: center;
-  background: linear-gradient(160deg, rgba(255,222,0,1) 0%, rgba(230,176,0,1) 100%);
+  background: #FFCB25;
   grid-template-columns: 40px 1fr 40px;
 
   &_bars {
