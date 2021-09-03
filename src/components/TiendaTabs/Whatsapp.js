@@ -11,13 +11,13 @@ const Whatsapp = () => {
 
       <div className={styles.whatsapp_wrap}>
         <a
-          href="https://wa.me/999999999?text=MENSAJE%20DE%20PRUEBA"
+          href="https://wa.me/+51998325518?text=MENSAJE%20DE%20PRUEBA"
           target="_blank"
           rel="noreferrer"
           className={`btn ${styles.whatsapp_item}`}
         >
           <WhatsappIcon />
-          <p>Nelson Manrique</p>
+          <p>Enrique Lau Len</p>
         </a>
 
         <a

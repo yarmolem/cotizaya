@@ -40,12 +40,11 @@
     max-width: 300px;
     padding: 3rem 2rem;
     color: $body-letter-color;
-
     background: $primary;
     
-    @include break_md {
-      background: $primary;
-    }
+    // @include break_md {
+    //   background: $yellow;
+    // }
 
     img {
       width: 200px;
