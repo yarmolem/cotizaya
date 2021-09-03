@@ -41,7 +41,7 @@
     padding: 3rem 2rem;
     color: $body-letter-color;
 
-    background: #FFCB25;
+    background: $primary;
     
     @include break_md {
       background: $primary;
