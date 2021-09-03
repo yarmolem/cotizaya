@@ -12,12 +12,13 @@
   }
   
   &_mobile {
+    width: 100%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
   }
 
   &_logoM {
-    margin-bottom: 20px;
 
     @include break_md {
       display: none;
@@ -25,8 +26,6 @@
     
     img {
       width: 100%;
-      display: block;
-      margin: 0 auto;
       max-width: 100px;
     }
   }
@@ -37,7 +36,7 @@
 
     @include break_md {
       display: block;
-      margin-left: auto;
+      
     }
 
     img {
