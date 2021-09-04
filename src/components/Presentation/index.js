@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 // terceros
 import Slider from 'react-slidy'
 
@@ -11,7 +11,25 @@ import styles from './presentation.module.scss'
 const SLIDES = ['NEUMATICO.jpg', 'MOTOR.jpg', 'ACEITES.jpg']
 
 const Presentation = () => {
+  const [timer, setTimer] = useState(false)
   const [actualSlide, setActualSlide] = useState(0)
+
+  useEffect(() => {
+    const timer = play()
+    setTimer(timer)
+    return () => clearTimeout(timer)
+  }, [])
+
+  const play = () => {
+    return setInterval(() => {
+      setActualSlide((state) => {
+        if (state + 1 === 3) return 0
+        return state + 1
+      })
+    }, 3000)
+  }
+
+  const reset = () => clearInterval(timer)
 
   const updateSlide = ({ currentSlide }) => {
     setActualSlide(currentSlide)
@@ -22,7 +40,13 @@ const Presentation = () => {
   }
 
   return (
-    <div className={styles.slider}>
+    <div
+      className={styles.slider}
+      onTouchStart={reset}
+      onMouseEnter={reset}
+      onTouchEnd={() => setTimer(play())}
+      onMouseLeave={() => setTimer(play())}
+    >
       <Slider showArrows={false} doAfterSlide={updateSlide} slide={actualSlide}>
         {SLIDES.map((img, i) => (
           <img key={`img-${i}`} src={`/images/${img}`} alt="" />
