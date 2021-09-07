@@ -9,6 +9,13 @@
   height: 100vh;
   z-index: 1400;
 
+  &_logo {
+    width: 100%;
+    height: auto;
+    display: grid;
+    place-items: center;
+  }
+
   &_overlay {
     position: absolute;
     top: 0;
@@ -47,8 +54,8 @@
     // }
 
     img {
-      width: 200px;
-      height: 200px;
+      width: 100px;
+      height: 100px;
       margin-top: 0rem;
       justify-self: center;
     }
