@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import router from 'next/router'
+import { useEffect, useState } from 'react'
 
 // utils
 import Store from '@/svg/Store'
@@ -9,13 +10,65 @@ import ChevronRight from '@/svg/ChevronRight'
 
 // styles
 import styles from '@/styles/components/tienda/tienda.module.scss'
+import { useGetBusquedaAvanzadaQuery } from '../../generated/graphql'
+
+const initialVar = {
+  page: 1,
+  numberPaginate: 10,
+  volkswagen: null,
+  mercedes: null,
+  c17210od: null,
+  of1722: null,
+  of1721: null,
+  cummins: null,
+  om366: null,
+  om906: null,
+  om924: null,
+  categoriaId: null
+}
 
 const Tienda = () => {
+  const [tiendas, setTiendas] = useState([])
+  const [variables, setVariables] = useState(initialVar)
   const { params } = useParams({
+    id: null,
     motor: '',
     marca: '',
     modelo: ''
   })
+
+  useGetBusquedaAvanzadaQuery({
+    variables,
+    onCompleted: (data) => {
+      if (data) {
+        const { GetBusquedaAvanzada, GetAllCategorias } = data
+        const categorias = [...GetAllCategorias].reduce((prev, cat) => {
+          const tienda = GetBusquedaAvanzada.data.filter(({ Categorias }) => {
+            return Categorias.some(({ categoriaId }) => {
+              return categoriaId === cat.categoriaId
+            })
+          })
+
+          if (tienda.length === 0) {
+            return [...prev]
+          } else {
+            return [...prev, { ...cat, tienda }]
+          }
+        }, [])
+
+        console.log('RESULT', categorias)
+        if (categorias.length !== 0) {
+          setTiendas(categorias[0].tienda)
+        }
+      }
+    }
+  })
+
+  useEffect(() => {
+    if (params.id) {
+      setVariables((v) => ({ ...v, categoriaId: params.id }))
+    }
+  }, [params.id])
 
   const brandLogo = (brand) => {
     if (brand === 'Volkswagen') return '/images/volkswagen.jpg'
@@ -71,19 +124,30 @@ const Tienda = () => {
           </div>
 
           <div className={styles.slider_mobile}>
-            {Array(10)
-              .fill(null)
-              .map((_, i) => (
-                <div key={`tiendas-${i}`} className={styles.tienda_slideritem}>
-                  <img src="/images/tienda.jpg" alt="" />
-                  <div>
-                    <button onClick={() => handleDetailStore('Agepsa')} className="btn">
-                      <Store />
-                      <span>Ver tienda</span>
-                    </button>
-                  </div>
+            {tiendas.map((tienda, i) => (
+              <div
+                key={`tiendas-${tienda.tiendaId}`}
+                className={styles.tienda_slideritem}
+              >
+                <img
+                  src={
+                    tienda.imagenPrincipal.id
+                      ? tienda.imagenPrincipal.url
+                      : '/images/tienda.jpg'
+                  }
+                  alt=""
+                />
+                <div>
+                  <button
+                    onClick={() => handleDetailStore(tienda.slug)}
+                    className="btn"
+                  >
+                    <Store />
+                    <span>Ver tienda</span>
+                  </button>
                 </div>
-              ))}
+              </div>
+            ))}
           </div>
 
           <div className={styles.paginacion}>

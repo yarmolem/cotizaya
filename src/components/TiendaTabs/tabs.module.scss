@@ -88,9 +88,8 @@
     flex-direction: column;
 
     @include break_lg {
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, 300px);
     }
   }
 

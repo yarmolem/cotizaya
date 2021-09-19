@@ -1,0 +1,15 @@
+mutation login($input: loginInput!) {
+  login(input: $input) {
+    userId
+    nombre
+    correo
+    celular
+    apiToken
+    tipoUsuario
+    imagenPrincipal {
+      id
+      url
+      descripcion
+    }
+  }
+}

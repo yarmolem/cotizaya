@@ -1,0 +1,72 @@
+query GetBusquedaAvanzada(
+  $page: Int
+  $numberPaginate: Int
+  $volkswagen: Int
+  $mercedes: Int
+  $c17210od: Int
+  $of1722: Int
+  $cummins: Int
+  $om366: Int
+  $om906: Int
+  $om924: Int
+  $categoriaId: Int
+) {
+  GetBusquedaAvanzada(
+    page: $page
+    numberPaginate: $numberPaginate
+    volkswagen: $volkswagen
+    mercedes: $mercedes
+    c17210od: $c17210od
+    of1722: $of1722
+    cummins: $cummins
+    om366: $om366
+    om906: $om906
+    om924: $om924
+    categoriaId: $categoriaId
+  ) {
+    nroTotalItems
+    data {
+      tiendaId
+      nombre
+      slug
+      imagenPrincipal {
+        id
+        descripcion
+        url
+      }
+      banco
+      correo
+      ruc
+      razonSocial
+      volkswagen
+      mercedes
+      c17210od
+      of1722
+      cummins
+      om366
+      om906
+      om924
+      Categorias {
+        categoriaId
+        titulo
+        slug
+        imagenPrincipal {
+          id
+          descripcion
+          url
+        }
+      }
+    }
+  }
+
+  GetAllCategorias {
+    categoriaId
+    titulo
+    slug
+    imagenPrincipal {
+      id
+      descripcion
+      url
+    }
+  }
+}

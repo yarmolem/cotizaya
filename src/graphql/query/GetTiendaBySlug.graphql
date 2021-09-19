@@ -1,0 +1,34 @@
+query GetIdTiendas($slug: String) {
+  GetIdTiendas(slug: $slug) {
+    tiendaId
+    nombre
+    slug
+    imagenPrincipal {
+      id
+      descripcion
+      url
+    }
+    banco
+    correo
+    ruc
+    razonSocial
+    volkswagen
+    mercedes
+    c17210od
+    of1722
+    cummins
+    om366
+    om906
+    om924
+    Categorias {
+      categoriaId
+      titulo
+      slug
+      imagenPrincipal {
+        id
+        descripcion
+        url
+      }
+    }
+  }
+}

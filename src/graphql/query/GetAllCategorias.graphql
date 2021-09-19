@@ -1,0 +1,12 @@
+query GetAllCategorias {
+  GetAllCategorias {
+    categoriaId
+    titulo
+    slug
+    imagenPrincipal {
+      id
+      descripcion
+      url
+    }
+  }
+}

@@ -280,6 +280,42 @@ input[type='button'].btn-outline-primary:focus {
     border-color: $gray;
   }
 }
+.btn.btn-outline-secundary,
+input[type='reset'].btn-outline-secundary,
+input[type='submit'].btn-outline-secundary,
+input[type='button'].btn-outline-secundary {
+  border-width: 2px;
+  border-color: $secundary;
+  color: $secundary;
+  background: white;
+
+  transition: all 0.3s ease-in;
+
+  &:disabled {
+    color: $letter-gray;
+    background: $gray;
+    border-color: $gray;
+    cursor: not-allowed;
+  }
+}
+.btn.btn-outline-secundary:hover,
+input[type='reset'].btn-outline-secundary:hover,
+input[type='submit'].btn-outline-secundary:hover,
+input[type='button'].btn-outline-secundary:hover,
+.btn.btn-outline-secundary:focus,
+input[type='reset'].btn-outline-secundary:focus,
+input[type='submit'].btn-outline-secundary:focus,
+input[type='button'].btn-outline-secundary:focus {
+  color: $body-letter-color;
+  border-color: $secundary;
+  background-color: lighten($color: $secundary, $amount: 50);
+
+  &:disabled {
+    color: $letter-gray;
+    background: $gray;
+    border-color: $gray;
+  }
+}
 
 /* Forms
 –––––––––––––––––––––––––––––––––––––––––––––––––– */

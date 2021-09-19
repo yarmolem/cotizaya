@@ -1,0 +1,15 @@
+mutation Registro($input: UserInput!) {
+  Registro: CrearUsuario(input: $input) {
+    userId
+    nombre
+    correo
+    celular
+    apiToken
+    tipoUsuario
+    imagenPrincipal {
+      id
+      descripcion
+      url
+    }
+  }
+}

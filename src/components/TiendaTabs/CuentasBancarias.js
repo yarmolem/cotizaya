@@ -1,16 +1,15 @@
 // styles
 import styles from './tabs.module.scss'
 
-const CuentasBancarias = () => {
+const CuentasBancarias = ({ bancos = '' }) => {
   return (
     <div className={styles.cuentas}>
       <h3>CUENTAS BANCARIAS</h3>
 
       <div className={styles.cuentas_flex}>
-        <p>BCP SOLES 191-2223273-0-02</p>
-        <p>BCP DÓLARES 191-2194983-1-53</p>
-        <p>BBVA SOLES 0011-0113-0100055664</p>
-        <p>BBVA DÓLARES 0011-0113-0100055672</p>
+        {bancos.split(',').map((banco, i) => (
+          <p key={`${banco}-${i}`}>{banco}</p>
+        ))}
       </div>
     </div>
   )

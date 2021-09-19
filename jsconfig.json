@@ -7,6 +7,9 @@
       "@/hooks/*": ["./src/hooks/*"],
       "@/styles/*": ["./src/styles/*"],
       "@/section/*": ["./src/section/*"],
+      "@/context/*": ["./src/context/*"],
+      "@/generated/*": ["./src/generated/*"],
+      "@/validation/*": ["./src/validation/*"],
       "@/components/*": ["./src/components/*"]
   }
 },

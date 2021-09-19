@@ -13,8 +13,24 @@ import {
 
 // utils
 import useParams from '@/hooks/useParams'
-import styles from '@/styles/components/detalle-tienda/detalle-tienda.module.scss'
 import ChevronDown from '@/svg/ChevronDown'
+import { useGetIdTiendasQuery } from '../generated/graphql'
+import styles from '@/styles/components/detalle-tienda/detalle-tienda.module.scss'
+
+const initialData = {
+  GetIdTiendas: {
+    ruc: '',
+    banco: '',
+    nombre: '',
+    correo: '',
+    razonSocial: '',
+    imagenPrincipal: {
+      id: '',
+      url: '',
+      descripcion: ''
+    }
+  }
+}
 
 const DetalleTienda = () => {
   const [actualTab, setActualTab] = useState('SEDES')
@@ -25,12 +41,20 @@ const DetalleTienda = () => {
     tienda: ''
   })
 
+  const { data = initialData } = useGetIdTiendasQuery({
+    variables: { slug: params.tienda }
+  })
+
+  console.log(data)
+
   const tabs = {
     SEDES: <SedesTab />,
     WHATSAPP: <WhatsappTab />,
-    'CUENTAS BANCARIAS': <CuentasBancariasTab />,
-    CORREOS: <CorreoTab />,
-    GENERAL: <GeneralTab />
+    'CUENTAS BANCARIAS': (
+      <CuentasBancariasTab bancos={data.GetIdTiendas.banco} />
+    ),
+    CORREOS: <CorreoTab correos={data.GetIdTiendas.correo} />,
+    GENERAL: <GeneralTab ruc={data.GetIdTiendas.ruc} />
   }
 
   const renderTabContent = () => tabs[actualTab]
@@ -47,10 +71,10 @@ const DetalleTienda = () => {
 
       <div className={styles.detalleTienda_mobile}>
         <h1 className={styles.detalleTienda_title}>
-          TIENDA <span>{params.tienda.toUpperCase()}</span>
+          TIENDA <span>{data.GetIdTiendas.nombre.toUpperCase()}</span>
         </h1>
         <div className={styles.detalleTienda_logoM}>
-          <img src="/images/tienda.jpg" alt="" />
+          <img src={data.GetIdTiendas.imagenPrincipal.url} alt="" />
         </div>
       </div>
 
@@ -82,7 +106,7 @@ const DetalleTienda = () => {
         ))}
 
         <div className={styles.detalleTienda_logoD}>
-          <img src="/images/tienda.jpg" alt="" />
+          <img src={data.GetIdTiendas.imagenPrincipal.url} alt="" />
         </div>
       </div>
 

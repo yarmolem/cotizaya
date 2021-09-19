@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -16,13 +16,27 @@ import useParams from '@/hooks/useParams'
 import ChevronRight from '@/svg/ChevronRight'
 import { useBreakPoint } from '@/hooks/useBreakPoint'
 
+import {
+  useGetAllCategoriasQuery,
+  useGetBusquedaAvanzadaQuery
+} from '../generated/graphql'
+
 // styles
 import styles from '@/styles/components/proveedores/proveedores.module.scss'
+import Empty from '../components/Empty'
 
 SwiperCore.use([Navigation])
 
+const initialData = {
+  GetBusquedaAvanzada: {
+    data: [],
+    nroTotalItems: 0
+  }
+}
+
 const Proveedores = () => {
   const router = useRouter()
+  const [cats, setCats] = useState([])
   const [nroCategorias, setNroCategorias] = useState(5)
   const { nroSlides } = useBreakPoint({ xs: 2, sm: 2, md: 2, lg: 3, xl: 5 })
   const { params } = useParams({
@@ -30,6 +44,63 @@ const Proveedores = () => {
     marca: '',
     modelo: ''
   })
+
+  const [variables, setVariables] = useState({
+    page: 1,
+    numberPaginate: nroCategorias,
+    volkswagen: null,
+    mercedes: null,
+    c17210od: null,
+    of1722: null,
+    of1721: null,
+    cummins: null,
+    om366: null,
+    om906: null,
+    om924: null,
+    categoriaId: null
+  })
+
+  useGetBusquedaAvanzadaQuery({
+    variables,
+    onCompleted: (data) => {
+      if (data) {
+        const { GetBusquedaAvanzada, GetAllCategorias } = data
+        const categorias = [...GetAllCategorias].reduce((prev, cat) => {
+          const tienda = GetBusquedaAvanzada.data.filter(({ Categorias }) => {
+            return Categorias.some(({ categoriaId }) => {
+              return categoriaId === cat.categoriaId
+            })
+          })
+
+          if (tienda.length === 0) {
+            return [...prev]
+          } else {
+            return [...prev, { ...cat, tienda }]
+          }
+        }, [])
+
+        console.log('RESULT', categorias)
+        setCats(categorias)
+      }
+    }
+  })
+
+  useEffect(() => {
+    setVariables({
+      page: 1,
+      numberPaginate: nroCategorias,
+      volkswagen: params.marca === 'Volkswagen' ? 1 : null,
+      mercedes: params.marca === 'Mercedes Benz' ? 1 : null,
+      c17210od: params.modelo === '17-210 OD' ? 1 : null,
+      of1722: params.modelo === 'OF 1722' ? 1 : null,
+      of1721: params.modelo === 'OF 1721' ? 1 : null,
+      cummins: params.motor === 'Cummins Serie B-GAS' ? 1 : null,
+      om366: params.motor === 'OM 366 LA' ? 1 : null,
+      om906: params.motor === 'OM 906' ? 1 : null,
+      om924: params.motor === 'OM 924 LA' ? 1 : null,
+      categoriaId: null
+    })
+  }, [params])
 
   const handleDetailStore = (tienda) => {
     router.push({
@@ -48,7 +119,13 @@ const Proveedores = () => {
     if (brand === 'Mercedes Benz') return '/images/mercedes.png'
   }
 
-  const categorias = Array(nroCategorias).fill(null)
+  const renderMoreButton = () => {
+    return (
+      <div onClick={handleMore} className={styles.proveedores_mostrar}>
+        <button className="btn btn-primary">Mostrar mas</button>
+      </div>
+    )
+  }
 
   return (
     <div>
@@ -85,8 +162,11 @@ const Proveedores = () => {
           </div>
         </div>
 
-        {categorias.map((_, i) => (
-          <div key={`categoria-${i}`} className={styles.proveedores_categoria}>
+        {cats.map((cat, i) => (
+          <div
+            key={`categoria-${cat.categoriaId}`}
+            className={styles.proveedores_categoria}
+          >
             <div className={styles.proveedores_categoriainfo}>
               {/* START TITULO EN DESKTOP */}
               <div>
@@ -95,10 +175,7 @@ const Proveedores = () => {
               </div>
               {/* END TITULO EN DESKTOP */}
 
-              <img
-                alt=""
-                src="https://cdn.motordoctor.de/thumb/assets/bvs/ersatz_categories/300x300/67.png"
-              />
+              <img alt="" src={cat.imagenPrincipal.url} />
             </div>
             <div className={styles.proveedores_categoriaslider}>
               {/* START TITULO EN MOBILE */}
@@ -109,48 +186,69 @@ const Proveedores = () => {
               {/* END TITULO EN MOBILE */}
 
               <div className={styles.slider_mobile}>
-                {Array(6)
-                  .fill(null)
-                  .map((_, i) => (
-                    <div
-                      key={`proveedores-${i}`}
-                      className={styles.proveedores_slideritem}
-                    >
-                      <img src="/images/tienda.jpg" alt="" />
-                      <div>
-                        <button onClick={() => handleDetailStore('Agepsa')} className="btn">
-                          <Store />
-                          <span>Ver tienda</span>
-                        </button>
-                      </div>
+                {cat.tienda.map((tienda, i) => (
+                  <div
+                    key={`proveedores-${tienda.tiendaId}`}
+                    className={styles.proveedores_slideritem}
+                  >
+                    <img
+                      src={
+                        tienda.imagenPrincipal.id
+                          ? tienda.imagenPrincipal.url
+                          : '/images/tienda.jpg'
+                      }
+                      alt=""
+                    />
+                    <div>
+                      <button
+                        onClick={() => handleDetailStore(tienda.slug)}
+                        className="btn"
+                      >
+                        <Store />
+                        <span>Ver tienda</span>
+                      </button>
                     </div>
-                  ))}
+                  </div>
+                ))}
               </div>
 
               <div className={styles.slider_desktop}>
-                <Swiper spaceBetween={20} slidesPerView={nroSlides} navigation>
-                  {Array(10)
-                    .fill(null)
-                    .map((_, i) => (
-                      <SwiperSlide key={`proveedores-${i}`}>
-                        <div className={styles.proveedores_slideritem}>
-                          <img src="/images/tienda.jpg" alt="" />
-                          <div>
-                            <button onClick={() => handleDetailStore('Agepsa')} className="btn">
-                              <Store />
-                              <span>Ver tienda</span>
-                            </button>
-                          </div>
+                <Swiper
+                  spaceBetween={20}
+                  slidesPerView={cat.tienda.length >= 5 ? 5 : cat.tienda.length}
+                  navigation
+                >
+                  {cat.tienda.map((tienda, i) => (
+                    <SwiperSlide key={`proveedores-${tienda.tiendaId}`}>
+                      <div className={styles.proveedores_slideritem}>
+                        {console.log(tienda.imagenPrincipal.url)}
+                        <img
+                          src={
+                            tienda.imagenPrincipal.id
+                              ? tienda.imagenPrincipal.url
+                              : '/images/tienda.jpg'
+                          }
+                          alt=""
+                        />
+                        <div>
+                          <button
+                            onClick={() => handleDetailStore(tienda.slug)}
+                            className="btn"
+                          >
+                            <Store />
+                            <span>Ver tienda</span>
+                          </button>
                         </div>
-                      </SwiperSlide>
-                    ))}
+                      </div>
+                    </SwiperSlide>
+                  ))}
                 </Swiper>
               </div>
 
               <button
                 onClick={() => {
                   router.push({
-                    pathname: '/tienda/1',
+                    pathname: `/tienda/${cat.categoriaId}`,
                     query: {
                       marca: params.marca,
                       modelo: params.modelo,
@@ -166,9 +264,7 @@ const Proveedores = () => {
           </div>
         ))}
 
-        <div onClick={handleMore} className={styles.proveedores_mostrar}>
-          <button className="btn btn-primary">Mostrar mas</button>
-        </div>
+        {cats.length !== 0 ? renderMoreButton() : <Empty />}
       </div>
     </div>
   )

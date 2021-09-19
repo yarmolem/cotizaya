@@ -95,6 +95,7 @@
     &slider {
       display: block;
       margin:  0 auto;
+      width: 100%;
       max-width: 90vw;
       // padding-block: 2rem;
       justify-self: center;
@@ -209,6 +210,7 @@
   }
 
   &_slideritem {
+    max-width: 155px;
     padding-block: 1rem;
     background-color: white;
     border: 1px solid #e2e2e2;
