@@ -20,19 +20,33 @@ import useDisclosure from '../hooks/useDisclosure'
 const privateRoutes = ['/tienda', '/proveedores', '/detalle-tienda']
 
 const Routes = ({ children, router }) => {
-  const { user } = useAuth()
+  const { user, login } = useAuth()
   const authModal = useDisclosure()
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   useEffect(() => {
     const isPrivate = privateRoutes.some((r) => r === router.pathname)
     if (isPrivate && !user.apiToken) {
-      console.log('MOSTRAR_MODAL')
       authModal.onOpen()
     } else {
       authModal.onClose()
     }
   }, [router.pathname])
+
+  useEffect(() => {
+    const token = localStorage.getItem('token') ?? null
+    if (token) {
+      authModal.onClose()
+      login({
+        userId: 'TEST',
+        nombre: 'TEST',
+        apiToken: token,
+        tipoUsuario: '2',
+        celular: '999999999',
+        correo: 'TEST@TEST.com'
+      })
+    }
+  }, [])
 
   return (
     <>

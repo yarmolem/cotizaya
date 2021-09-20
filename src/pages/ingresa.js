@@ -13,6 +13,8 @@ import { useLoginMutation } from '../generated/graphql'
 
 // styles
 import styles from '@/styles/components/ingresa/ingresa.module.scss'
+import { toast } from 'react-toastify'
+import Error from '@/components/Error'
 
 const Ingresa = () => {
   const router = useRouter()
@@ -30,10 +32,20 @@ const Ingresa = () => {
         const { __typename, imagenPrincipal, ...rest } = res.data.login
         login(rest)
         router.push('/')
+        toast.success('Login Exitoso')
+      } else {
+        const error = res.errors.graphQLErrors[0].debugMessage
+        if (
+          error === 'CUENTA_DESACTIVADA' ||
+          error === 'CONTRASEÑA_INCORRECTA'
+        ) {
+          toast.error('Correo o contraseña invalido')
+        }
       }
     },
-    validationSchema: loginSchema,
-    initialValues: { correo: '', password: '' }
+    enableReinitialize: true,
+    initialValues: { correo: '', password: '' },
+    validationSchema: loginSchema
   })
 
   const isAllFill = () => {
@@ -56,35 +68,41 @@ const Ingresa = () => {
           <h3>INGRESA</h3>
 
           <form className={styles.ingresa_form} onSubmit={formik.handleSubmit}>
-            <div className={`${styles.input} ${filledInput('correo')}`}>
-              <input
-                required
-                id="correo"
-                name="correo"
-                type="email"
-                value={formik.values.correo}
-                onChange={formik.handleChange}
-              />
-              <label htmlFor="correo">Email</label>
+            <div>
+              <div className={`${styles.input} ${filledInput('correo')}`}>
+                <input
+                  required
+                  id="correo"
+                  name="correo"
+                  type="email"
+                  value={formik.values.correo}
+                  onChange={formik.handleChange}
+                />
+                <label htmlFor="correo">Email</label>
+              </div>
+              <Error {...formik} name="correo" />
             </div>
 
-            <div className={`${styles.input} ${filledInput('password')}`}>
-              <input
-                required
-                type={showPassword ? 'text' : 'password'}
-                id="password"
-                name="password"
-                value={formik.values.password}
-                onChange={formik.handleChange}
-              />
-              <label htmlFor="password">Clave</label>
-              <button
-                type="button"
-                className="btn-icon"
-                onClick={() => setShowPassword((p) => !p)}
-              >
-                {showPassword ? <SlashEye /> : <Eye />}
-              </button>
+            <div>
+              <div className={`${styles.input} ${filledInput('password')}`}>
+                <input
+                  required
+                  type={showPassword ? 'text' : 'password'}
+                  id="password"
+                  name="password"
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                />
+                <label htmlFor="password">Clave</label>
+                <button
+                  type="button"
+                  className="btn-icon"
+                  onClick={() => setShowPassword((p) => !p)}
+                >
+                  {showPassword ? <SlashEye /> : <Eye />}
+                </button>
+              </div>
+              <Error {...formik} name="password" />
             </div>
             <button
               type="submit"

@@ -1,42 +1,76 @@
+import { useState } from 'react'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 
 // terceros
+import { useFormik } from 'formik'
 import { toast } from 'react-toastify'
 
 // utils
-import { useForm } from '@/hooks/useForm'
+import Eye from '@/svg/Eye'
+import SlashEye from '@/svg/SlashEye'
+import useAuth from '@/hooks/useAuth'
+import { handleError } from 'src/utils/handleError'
+import { useRegistroMutation } from '../generated/graphql'
+import { registerSchema } from '@/validation/registerSchema'
 
 // styles
 import styles from '@/styles/components/ingresa/ingresa.module.scss'
-import Eye from '@/svg/Eye'
-import { useState } from 'react'
-import SlashEye from '@/svg/SlashEye'
+import Error from '@/components/Error'
+
+const initialReg = {
+  nombre: '',
+  correo: '',
+  celular: '',
+  password: '',
+  tipoUsuario: 2,
+  imagenPrincipal: 1
+}
 
 const RegistroPersona = () => {
+  const { login } = useAuth()
+  const router = useRouter()
   const [showPassword, setShowPassword] = useState(false)
-  const { form, handleChange } = useForm({
-    name: '',
-    email: '',
-    password: '',
-    telefono: ''
+
+  const [registerMutation] = useRegistroMutation({
+    onError: handleError
+  })
+
+  const formik = useFormik({
+    onSubmit: async (values) => {
+      const res = await registerMutation({
+        variables: { input: { ...values } }
+      })
+      if (res?.data?.Registro) {
+        console.log(res)
+        const { __typename, imagenPrincipal, ...rest } = res.data.Registro
+        login(rest)
+        router.push('/')
+        toast.success('Registro Exitoso')
+      } else {
+        const error = res.errors.graphQLErrors[0].debugMessage
+        if (error === 'YA_EXISTE') {
+          toast.error('Correo ya esta siendo utilizado')
+        }
+      }
+    },
+    enableReinitialize: true,
+    initialValues: initialReg,
+    validationSchema: registerSchema
   })
 
   const isAllFill = () => {
+    const { correo, password, nombre, celular } = formik.values
     return (
-      form.name.trim() !== '' &&
-      form.email.trim() !== '' &&
-      form.password.trim() !== '' &&
-      form.telefono.trim() !== ''
+      nombre.trim() !== '' &&
+      celular.trim() !== '' &&
+      correo.trim() !== '' &&
+      password.trim() !== ''
     )
   }
 
   const filledInput = (name = '') => {
-    return form[name].trim() !== '' ? styles.filled : ''
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    toast.success('Registro Exitoso')
+    return formik.values[name].trim() !== '' ? styles.filled : ''
   }
 
   return (
@@ -49,60 +83,70 @@ const RegistroPersona = () => {
         <div className={styles.registrate}>
           <h3>REGISTRE SUS DATOS</h3>
 
-          <form className={styles.registrate_form} onSubmit={handleSubmit}>
-            <div className={`${styles.input} ${filledInput('name')}`}>
-              <input
-                required
-                name="name"
-                type="text"
-                id="clientName"
-                value={form.name}
-                onChange={handleChange}
-              />
-              <label htmlFor="clientName">Nombre completo</label>
+          <form
+            className={styles.registrate_form}
+            onSubmit={formik.handleSubmit}
+          >
+            <div>
+              <div className={`${styles.input} ${filledInput('nombre')}`}>
+                <input
+                  id="nombre"
+                  type="text"
+                  name="nombre"
+                  value={formik.values.nombre}
+                  onChange={formik.handleChange}
+                />
+                <label htmlFor="nombre">Nombre completo</label>
+              </div>
+              <Error {...formik} name="nombre" />
             </div>
 
-            <div className={`${styles.input} ${filledInput('telefono')}`}>
-              <input
-                required
-                name="telefono"
-                type="text"
-                id="clientPhone"
-                value={form.telefono}
-                onChange={handleChange}
-              />
-              <label htmlFor="clientPhone">Teléfono</label>
+            <div>
+              <div className={`${styles.input} ${filledInput('correo')}`}>
+                <input
+                  id="correo"
+                  type="email"
+                  name="correo"
+                  value={formik.values.correo}
+                  onChange={formik.handleChange}
+                />
+                <label htmlFor="correo">Email</label>
+              </div>
+              <Error {...formik} name="correo" />
+            </div>
+            <div>
+              <div className={`${styles.input} ${filledInput('celular')}`}>
+                <input
+                  id="celular"
+                  type="text"
+                  name="celular"
+                  value={formik.values.celular}
+                  onChange={formik.handleChange}
+                />
+                <label htmlFor="celular">Celular</label>
+              </div>
+              <Error {...formik} name="celular" />
             </div>
 
-            <div className={`${styles.input} ${filledInput('email')}`}>
-              <input
-                required
-                name="email"
-                type="email"
-                id="clientEmail"
-                value={form.email}
-                onChange={handleChange}
-              />
-              <label htmlFor="clientEmail">E-mail</label>
-            </div>
-
-            <div className={`${styles.input} ${filledInput('password')}`}>
-              <input
-                required
-                type={showPassword ? 'text' : 'password'}
-                name="password"
-                id="clientPassword"
-                value={form.password}
-                onChange={handleChange}
-              />
-              <label htmlFor="clientPassword">Clave</label>
-              <button
-                type="button"
-                className="btn-icon"
-                onClick={() => setShowPassword((p) => !p)}
-              >
-                {showPassword ? <SlashEye /> : <Eye />}
-              </button>
+            <div>
+              <div className={`${styles.input} ${filledInput('password')}`}>
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  id="password"
+                  name="password"
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                />
+                <label htmlFor="password">Clave</label>
+                <button
+                  type="button"
+                  className="btn-icon"
+                  onClick={() => setShowPassword((p) => !p)}
+                >
+                  {showPassword ? <SlashEye /> : <Eye />}
+                </button>
+              </div>
+              <Error {...formik} name="password" />
             </div>
 
             <button

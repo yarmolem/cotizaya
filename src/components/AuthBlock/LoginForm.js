@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Eye from '../../svg/Eye'
 import SlashEye from '../../svg/SlashEye'
+import Error from '../Error'
 
 // styles
 import styles from './authblock.module.scss'
@@ -22,16 +23,19 @@ const LoginForm = ({ formik, toggleAuth }) => {
       <h3>INGRESA</h3>
 
       <form onSubmit={formik.handleSubmit} className={styles.ingresa_form}>
-        <div className={`${styles.input} ${filledInput('correo')}`}>
-          <input
-            required
-            id="correo"
-            type="email"
-            name="correo"
-            value={formik.values.correo}
-            onChange={formik.handleChange}
-          />
-          <label htmlFor="correo">Email</label>
+        <div>
+          <div className={`${styles.input} ${filledInput('correo')}`}>
+            <input
+              required
+              id="correo"
+              type="email"
+              name="correo"
+              value={formik.values.correo}
+              onChange={formik.handleChange}
+            />
+            <label htmlFor="correo">Email</label>
+          </div>
+          <Error {...formik} name="correo" />
         </div>
 
         <div className={`${styles.input} ${filledInput('password')}`}>
@@ -52,6 +56,7 @@ const LoginForm = ({ formik, toggleAuth }) => {
             {showPassword ? <SlashEye /> : <Eye />}
           </button>
         </div>
+        <Error {...formik} name="password" />
         <button
           type="submit"
           disabled={!isAllFill()}

@@ -4,6 +4,7 @@ import { useFormik } from 'formik'
 
 // Components
 import LoginForm from './LoginForm'
+import { toast } from 'react-toastify'
 
 // utils
 import useAuth from '../../hooks/useAuth'
@@ -49,6 +50,12 @@ const AuthBlock = ({ isOpen, onToggle = () => {} }) => {
         const { __typename, imagenPrincipal, ...rest } = res.data.login
         login(rest)
         onToggle()
+        toast.success('Login Exitoso')
+      } else {
+        const error = res.errors.graphQLErrors[0].debugMessage
+        if (error === 'CUENTA_DESACTIVADA') {
+          toast.error('Correo o contraseña invalido')
+        }
       }
     },
     enableReinitialize: true,
@@ -65,6 +72,12 @@ const AuthBlock = ({ isOpen, onToggle = () => {} }) => {
         const { __typename, imagenPrincipal, ...rest } = res.data.Registro
         login(rest)
         onToggle()
+        toast.success('Registro Exitoso')
+      } else {
+        const error = res.errors.graphQLErrors[0].debugMessage
+        if (error === 'YA_EXISTE') {
+          toast.error('Correo ya esta siendo utilizado')
+        }
       }
     },
     enableReinitialize: true,

@@ -17,7 +17,11 @@ const Presentation = () => {
   useEffect(() => {
     const timer = play()
     setTimer(timer)
-    return () => clearTimeout(timer)
+    return () => {
+      setTimer(false)
+      setActualSlide(0)
+      clearTimeout(timer)
+    }
   }, [])
 
   const play = () => {

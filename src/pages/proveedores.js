@@ -76,7 +76,7 @@ const Proveedores = () => {
           }
         }, [])
 
-        console.log('RESULT', categorias)
+        // console.log('RESULT', categorias)
         setCats(categorias)
       }
     }
@@ -167,7 +167,7 @@ const Proveedores = () => {
             <div className={styles.proveedores_categoriainfo}>
               {/* START TITULO EN DESKTOP */}
               <div>
-                <h3>Reparo de motor</h3>
+                <h3>{cat.titulo}</h3>
                 <p>para {params.modelo}</p>
               </div>
               {/* END TITULO EN DESKTOP */}
@@ -177,7 +177,7 @@ const Proveedores = () => {
             <div className={styles.proveedores_categoriaslider}>
               {/* START TITULO EN MOBILE */}
               <div>
-                <h3>Reparo de motor</h3>
+                <h3>{cat.titulo}</h3>
                 <p>para {params.modelo}</p>
               </div>
               {/* END TITULO EN MOBILE */}
@@ -220,7 +220,6 @@ const Proveedores = () => {
                   {cat.tienda.map((tienda, i) => (
                     <SwiperSlide key={`proveedores-${tienda.tiendaId}`}>
                       <div className={styles.proveedores_slideritem}>
-                        {console.log(tienda.imagenPrincipal.url)}
                         <img
                           src={
                             tienda.imagenPrincipal.id
