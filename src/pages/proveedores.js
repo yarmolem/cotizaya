@@ -16,10 +16,7 @@ import useParams from '@/hooks/useParams'
 import ChevronRight from '@/svg/ChevronRight'
 import { useBreakPoint } from '@/hooks/useBreakPoint'
 
-import {
-  useGetAllCategoriasQuery,
-  useGetBusquedaAvanzadaQuery
-} from '../generated/graphql'
+import { useGetBusquedaAvanzadaQuery } from '../generated/graphql'
 
 // styles
 import styles from '@/styles/components/proveedores/proveedores.module.scss'
@@ -27,12 +24,12 @@ import Empty from '../components/Empty'
 
 SwiperCore.use([Navigation])
 
-const initialData = {
-  GetBusquedaAvanzada: {
-    data: [],
-    nroTotalItems: 0
-  }
-}
+// const initialData = {
+//   GetBusquedaAvanzada: {
+//     data: [],
+//     nroTotalItems: 0
+//   }
+// }
 
 const Proveedores = () => {
   const router = useRouter()
@@ -215,7 +212,9 @@ const Proveedores = () => {
               <div className={styles.slider_desktop}>
                 <Swiper
                   spaceBetween={20}
-                  slidesPerView={cat.tienda.length >= 5 ? 5 : cat.tienda.length}
+                  slidesPerView={
+                    cat.tienda.length >= 5 ? nroSlides : cat.tienda.length
+                  }
                   navigation
                 >
                   {cat.tienda.map((tienda, i) => (
