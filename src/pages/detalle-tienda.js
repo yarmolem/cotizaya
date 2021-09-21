@@ -45,11 +45,9 @@ const DetalleTienda = () => {
     variables: { slug: params.tienda }
   })
 
-  console.log(data)
-
   const tabs = {
-    SEDES: <SedesTab />,
-    WHATSAPP: <WhatsappTab />,
+    SEDES: <SedesTab sedes={data.GetIdTiendas.Sede} />,
+    WHATSAPP: <WhatsappTab asesores={data.GetIdTiendas.Asesor} />,
     'CUENTAS BANCARIAS': (
       <CuentasBancariasTab bancos={data.GetIdTiendas.banco} />
     ),

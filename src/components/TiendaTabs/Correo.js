@@ -10,7 +10,7 @@ const Correo = ({ correos = '' }) => {
       {correos.split(',').map((correo, i) => (
         <div key={`${correo}-${i}`} className={styles.correos_item}>
           <Letter />
-          <a href="#">{correo}</a>
+          <a href={`mailto:${correo}`}>{correo}</a>
         </div>
       ))}
     </div>

@@ -20,6 +20,16 @@ query GetIdTiendas($slug: String) {
     om366
     om906
     om924
+    Asesor {
+      asesorId
+      nombre
+      url
+    }
+    Sede {
+      sedeId
+      direccion
+      lugar
+    }
     Categorias {
       categoriaId
       titulo

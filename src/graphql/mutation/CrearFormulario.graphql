@@ -1,0 +1,9 @@
+mutation CrearFormulario($input: FormularioInput!) {
+  CrearFormulario(input: $input) {
+    formularioId
+    nombre
+    ruc
+    email
+    celular
+  }
+}

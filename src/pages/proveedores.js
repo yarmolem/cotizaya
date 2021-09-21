@@ -21,6 +21,7 @@ import { useGetBusquedaAvanzadaQuery } from '../generated/graphql'
 // styles
 import styles from '@/styles/components/proveedores/proveedores.module.scss'
 import Empty from '../components/Empty'
+import { formatParams } from 'src/utils/formatParams'
 
 SwiperCore.use([Navigation])
 
@@ -34,7 +35,6 @@ SwiperCore.use([Navigation])
 const Proveedores = () => {
   const router = useRouter()
   const [cats, setCats] = useState([])
-  const [nroCategorias, setNroCategorias] = useState(5)
   const { nroSlides } = useBreakPoint({ xs: 2, sm: 2, md: 2, lg: 3, xl: 5 })
   const { params } = useParams({
     motor: '',
@@ -44,7 +44,7 @@ const Proveedores = () => {
 
   const [variables, setVariables] = useState({
     page: 1,
-    numberPaginate: nroCategorias,
+    numberPaginate: 10,
     volkswagen: null,
     mercedes: null,
     c17210od: null,
@@ -83,20 +83,8 @@ const Proveedores = () => {
   })
 
   useEffect(() => {
-    setVariables({
-      page: 1,
-      numberPaginate: nroCategorias,
-      volkswagen: params.marca === 'Volkswagen' ? 1 : null,
-      mercedes: params.marca === 'Mercedes Benz' ? 1 : null,
-      c17210od: params.modelo === '17-210 OD' ? 1 : null,
-      of1722: params.modelo === 'OF 1722' ? 1 : null,
-      of1721: params.modelo === 'OF 1721' ? 1 : null,
-      cummins: params.motor === 'Cummins Serie B-GAS' ? 1 : null,
-      om366: params.motor === 'OM 366 LA' ? 1 : null,
-      om906: params.motor === 'OM 906' ? 1 : null,
-      om924: params.motor === 'OM 924 LA' ? 1 : null,
-      categoriaId: null
-    })
+    const paramsFormated = formatParams(params)
+    setVariables(paramsFormated)
   }, [params])
 
   const handleDetailStore = (tienda) => {
@@ -109,19 +97,9 @@ const Proveedores = () => {
     })
   }
 
-  const handleMore = () => setNroCategorias((c) => c + 1)
-
   const brandLogo = (brand) => {
     if (brand === 'Volkswagen') return '/images/volkswagen.jpg'
     if (brand === 'Mercedes Benz') return '/images/mercedes.png'
-  }
-
-  const renderMoreButton = () => {
-    return (
-      <div onClick={handleMore} className={styles.proveedores_mostrar}>
-        <button className="btn btn-primary">Mostrar mas</button>
-      </div>
-    )
   }
 
   return (
@@ -211,10 +189,9 @@ const Proveedores = () => {
 
               <div className={styles.slider_desktop}>
                 <Swiper
+                  // width={350}
                   spaceBetween={20}
-                  slidesPerView={
-                    cat.tienda.length >= 5 ? nroSlides : cat.tienda.length
-                  }
+                  slidesPerView={nroSlides}
                   navigation
                 >
                   {cat.tienda.map((tienda, i) => (
@@ -262,7 +239,7 @@ const Proveedores = () => {
           </div>
         ))}
 
-        {cats.length !== 0 ? renderMoreButton() : <Empty />}
+        {cats.length === 0 ? <Empty /> : null}
       </div>
     </div>
   )

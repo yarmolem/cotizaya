@@ -5,6 +5,7 @@ query GetBusquedaAvanzada(
   $mercedes: Int
   $c17210od: Int
   $of1722: Int
+  $of1721: Int
   $cummins: Int
   $om366: Int
   $om906: Int
@@ -18,6 +19,7 @@ query GetBusquedaAvanzada(
     mercedes: $mercedes
     c17210od: $c17210od
     of1722: $of1722
+    of1721: $of1721
     cummins: $cummins
     om366: $om366
     om906: $om906
@@ -42,6 +44,7 @@ query GetBusquedaAvanzada(
       mercedes
       c17210od
       of1722
+      of1721
       cummins
       om366
       om906

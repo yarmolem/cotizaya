@@ -11,6 +11,8 @@ import ChevronRight from '@/svg/ChevronRight'
 // styles
 import styles from '@/styles/components/tienda/tienda.module.scss'
 import { useGetBusquedaAvanzadaQuery } from '../../generated/graphql'
+import { formatParams } from 'src/utils/formatParams'
+import { handlePagination } from 'src/utils/handlePagination'
 
 const initialVar = {
   page: 1,
@@ -28,7 +30,7 @@ const initialVar = {
 }
 
 const Tienda = () => {
-  const [tiendas, setTiendas] = useState([])
+  const [tiendas, setTiendas] = useState({ data: [], nroTotalItems: 0 })
   const [variables, setVariables] = useState(initialVar)
   const { params } = useParams({
     id: null,
@@ -41,32 +43,18 @@ const Tienda = () => {
     variables,
     onCompleted: (data) => {
       if (data) {
-        const { GetBusquedaAvanzada, GetAllCategorias } = data
-        const categorias = [...GetAllCategorias].reduce((prev, cat) => {
-          const tienda = GetBusquedaAvanzada.data.filter(({ Categorias }) => {
-            return Categorias.some(({ categoriaId }) => {
-              return categoriaId === cat.categoriaId
-            })
-          })
+        const { GetBusquedaAvanzada } = data
 
-          if (tienda.length === 0) {
-            return [...prev]
-          } else {
-            return [...prev, { ...cat, tienda }]
-          }
-        }, [])
-
-        console.log('RESULT', categorias)
-        if (categorias.length !== 0) {
-          setTiendas(categorias[0].tienda)
-        }
+        console.log('RESULT', GetBusquedaAvanzada)
+        setTiendas(GetBusquedaAvanzada)
       }
     }
   })
 
   useEffect(() => {
     if (params.id) {
-      setVariables((v) => ({ ...v, categoriaId: params.id }))
+      const paramsFormated = formatParams(params)
+      setVariables(paramsFormated)
     }
   }, [params.id])
 
@@ -84,6 +72,17 @@ const Tienda = () => {
       }
     })
   }
+
+  const handleGoBack = (payload) => {
+    router.push({
+      pathname: '/proveedores',
+      query: {
+        ...payload
+      }
+    })
+  }
+
+  const nroPage = handlePagination(tiendas.nroTotalItems)
 
   return (
     <div>
@@ -105,15 +104,29 @@ const Tienda = () => {
               <a>INICIO</a>
             </Link>
             <ChevronRight />
-            <a href="#">
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault()
+                const { marca } = params
+                handleGoBack({ marca })
+              }}
+            >
               <img src={brandLogo(params.marca)} alt="" />
             </a>
             <ChevronRight />
-            <a href="#">
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault()
+                const { id, ...rest } = params
+                handleGoBack(rest)
+              }}
+            >
               {params.marca} {params.modelo}
             </a>
             <ChevronRight />
-            <a href="#">Listado de tiendas</a>
+            <p style={{ margin: 0 }}>Listado de tiendas</p>
           </div>
         </div>
 
@@ -124,7 +137,7 @@ const Tienda = () => {
           </div>
 
           <div className={styles.slider_mobile}>
-            {tiendas.map((tienda, i) => (
+            {tiendas.data.map((tienda, i) => (
               <div
                 key={`tiendas-${tienda.tiendaId}`}
                 className={styles.tienda_slideritem}
@@ -151,7 +164,18 @@ const Tienda = () => {
           </div>
 
           <div className={styles.paginacion}>
-            <span>1</span> de 10 <a href="#">Siguiente {'>'}</a>
+            <span>1</span> de {nroPage}
+            <a
+              href="#"
+              disabled={nroPage === variables.page}
+              onClick={(e) => {
+                e.preventDefault()
+                if (nroPage === variables.page) return
+                setVariables((v) => ({ ...v, page: v.page + 1 }))
+              }}
+            >
+              Siguiente {'>'}
+            </a>
           </div>
         </div>
       </div>

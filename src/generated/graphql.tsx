@@ -385,6 +385,7 @@ export type QueryGetBusquedaAvanzadaArgs = {
   cummins?: Maybe<Scalars['Int']>;
   mercedes?: Maybe<Scalars['Int']>;
   numberPaginate?: Maybe<Scalars['Int']>;
+  of1721?: Maybe<Scalars['Int']>;
   of1722?: Maybe<Scalars['Int']>;
   om366?: Maybe<Scalars['Int']>;
   om906?: Maybe<Scalars['Int']>;
@@ -433,7 +434,9 @@ export enum SortOrder {
 
 export type Tienda = {
   __typename?: 'Tienda';
+  Asesor?: Maybe<Array<Maybe<Asesor>>>;
   Categorias?: Maybe<Array<Maybe<Categorias>>>;
+  Sede?: Maybe<Array<Maybe<Sede>>>;
   banco?: Maybe<Scalars['String']>;
   c17210od?: Maybe<Scalars['Int']>;
   correo?: Maybe<Scalars['String']>;
@@ -441,6 +444,7 @@ export type Tienda = {
   imagenPrincipal?: Maybe<Imagenes>;
   mercedes?: Maybe<Scalars['Int']>;
   nombre?: Maybe<Scalars['String']>;
+  of1721?: Maybe<Scalars['Int']>;
   of1722?: Maybe<Scalars['Int']>;
   om366?: Maybe<Scalars['Int']>;
   om906?: Maybe<Scalars['Int']>;
@@ -460,6 +464,7 @@ export type TiendaInput = {
   imagenPrincipal?: Maybe<Scalars['Int']>;
   mercedes?: Maybe<Scalars['Int']>;
   nombre?: Maybe<Scalars['String']>;
+  of1721?: Maybe<Scalars['Int']>;
   of1722?: Maybe<Scalars['Int']>;
   om366?: Maybe<Scalars['Int']>;
   om906?: Maybe<Scalars['Int']>;
@@ -521,6 +526,13 @@ export type SliderInput = {
   titulo?: Maybe<Scalars['String']>;
 };
 
+export type CrearFormularioMutationVariables = Exact<{
+  input: FormularioInput;
+}>;
+
+
+export type CrearFormularioMutation = { __typename?: 'Mutation', CrearFormulario?: Maybe<{ __typename?: 'Formulario', formularioId?: Maybe<number>, nombre?: Maybe<string>, ruc?: Maybe<string>, email?: Maybe<string>, celular?: Maybe<string> }> };
+
 export type LoginMutationVariables = Exact<{
   input: LoginInput;
 }>;
@@ -547,6 +559,7 @@ export type GetBusquedaAvanzadaQueryVariables = Exact<{
   mercedes?: Maybe<Scalars['Int']>;
   c17210od?: Maybe<Scalars['Int']>;
   of1722?: Maybe<Scalars['Int']>;
+  of1721?: Maybe<Scalars['Int']>;
   cummins?: Maybe<Scalars['Int']>;
   om366?: Maybe<Scalars['Int']>;
   om906?: Maybe<Scalars['Int']>;
@@ -555,16 +568,53 @@ export type GetBusquedaAvanzadaQueryVariables = Exact<{
 }>;
 
 
-export type GetBusquedaAvanzadaQuery = { __typename?: 'Query', GetBusquedaAvanzada?: Maybe<{ __typename?: 'GetAllTiendas', nroTotalItems?: Maybe<number>, data?: Maybe<Array<{ __typename?: 'Tienda', tiendaId?: Maybe<number>, nombre?: Maybe<string>, slug?: Maybe<string>, banco?: Maybe<string>, correo?: Maybe<string>, ruc?: Maybe<string>, razonSocial?: Maybe<string>, volkswagen?: Maybe<number>, mercedes?: Maybe<number>, c17210od?: Maybe<number>, of1722?: Maybe<number>, cummins?: Maybe<number>, om366?: Maybe<number>, om906?: Maybe<number>, om924?: Maybe<number>, imagenPrincipal?: Maybe<{ __typename?: 'Imagenes', id?: Maybe<string>, descripcion?: Maybe<string>, url?: Maybe<string> }>, Categorias?: Maybe<Array<Maybe<{ __typename?: 'Categorias', categoriaId?: Maybe<number>, titulo?: Maybe<string>, slug?: Maybe<string>, imagenPrincipal?: Maybe<{ __typename?: 'Imagenes', id?: Maybe<string>, descripcion?: Maybe<string>, url?: Maybe<string> }> }>>> }>> }>, GetAllCategorias?: Maybe<Array<{ __typename?: 'Categorias', categoriaId?: Maybe<number>, titulo?: Maybe<string>, slug?: Maybe<string>, imagenPrincipal?: Maybe<{ __typename?: 'Imagenes', id?: Maybe<string>, descripcion?: Maybe<string>, url?: Maybe<string> }> }>> };
+export type GetBusquedaAvanzadaQuery = { __typename?: 'Query', GetBusquedaAvanzada?: Maybe<{ __typename?: 'GetAllTiendas', nroTotalItems?: Maybe<number>, data?: Maybe<Array<{ __typename?: 'Tienda', tiendaId?: Maybe<number>, nombre?: Maybe<string>, slug?: Maybe<string>, banco?: Maybe<string>, correo?: Maybe<string>, ruc?: Maybe<string>, razonSocial?: Maybe<string>, volkswagen?: Maybe<number>, mercedes?: Maybe<number>, c17210od?: Maybe<number>, of1722?: Maybe<number>, of1721?: Maybe<number>, cummins?: Maybe<number>, om366?: Maybe<number>, om906?: Maybe<number>, om924?: Maybe<number>, imagenPrincipal?: Maybe<{ __typename?: 'Imagenes', id?: Maybe<string>, descripcion?: Maybe<string>, url?: Maybe<string> }>, Categorias?: Maybe<Array<Maybe<{ __typename?: 'Categorias', categoriaId?: Maybe<number>, titulo?: Maybe<string>, slug?: Maybe<string>, imagenPrincipal?: Maybe<{ __typename?: 'Imagenes', id?: Maybe<string>, descripcion?: Maybe<string>, url?: Maybe<string> }> }>>> }>> }>, GetAllCategorias?: Maybe<Array<{ __typename?: 'Categorias', categoriaId?: Maybe<number>, titulo?: Maybe<string>, slug?: Maybe<string>, imagenPrincipal?: Maybe<{ __typename?: 'Imagenes', id?: Maybe<string>, descripcion?: Maybe<string>, url?: Maybe<string> }> }>> };
 
 export type GetIdTiendasQueryVariables = Exact<{
   slug?: Maybe<Scalars['String']>;
 }>;
 
 
-export type GetIdTiendasQuery = { __typename?: 'Query', GetIdTiendas?: Maybe<{ __typename?: 'Tienda', tiendaId?: Maybe<number>, nombre?: Maybe<string>, slug?: Maybe<string>, banco?: Maybe<string>, correo?: Maybe<string>, ruc?: Maybe<string>, razonSocial?: Maybe<string>, volkswagen?: Maybe<number>, mercedes?: Maybe<number>, c17210od?: Maybe<number>, of1722?: Maybe<number>, cummins?: Maybe<number>, om366?: Maybe<number>, om906?: Maybe<number>, om924?: Maybe<number>, imagenPrincipal?: Maybe<{ __typename?: 'Imagenes', id?: Maybe<string>, descripcion?: Maybe<string>, url?: Maybe<string> }>, Categorias?: Maybe<Array<Maybe<{ __typename?: 'Categorias', categoriaId?: Maybe<number>, titulo?: Maybe<string>, slug?: Maybe<string>, imagenPrincipal?: Maybe<{ __typename?: 'Imagenes', id?: Maybe<string>, descripcion?: Maybe<string>, url?: Maybe<string> }> }>>> }> };
+export type GetIdTiendasQuery = { __typename?: 'Query', GetIdTiendas?: Maybe<{ __typename?: 'Tienda', tiendaId?: Maybe<number>, nombre?: Maybe<string>, slug?: Maybe<string>, banco?: Maybe<string>, correo?: Maybe<string>, ruc?: Maybe<string>, razonSocial?: Maybe<string>, volkswagen?: Maybe<number>, mercedes?: Maybe<number>, c17210od?: Maybe<number>, of1722?: Maybe<number>, cummins?: Maybe<number>, om366?: Maybe<number>, om906?: Maybe<number>, om924?: Maybe<number>, imagenPrincipal?: Maybe<{ __typename?: 'Imagenes', id?: Maybe<string>, descripcion?: Maybe<string>, url?: Maybe<string> }>, Asesor?: Maybe<Array<Maybe<{ __typename?: 'Asesor', asesorId?: Maybe<number>, nombre?: Maybe<string>, url?: Maybe<string> }>>>, Sede?: Maybe<Array<Maybe<{ __typename?: 'Sede', sedeId?: Maybe<number>, direccion?: Maybe<string>, lugar?: Maybe<string> }>>>, Categorias?: Maybe<Array<Maybe<{ __typename?: 'Categorias', categoriaId?: Maybe<number>, titulo?: Maybe<string>, slug?: Maybe<string>, imagenPrincipal?: Maybe<{ __typename?: 'Imagenes', id?: Maybe<string>, descripcion?: Maybe<string>, url?: Maybe<string> }> }>>> }> };
 
 
+export const CrearFormularioDocument = gql`
+    mutation CrearFormulario($input: FormularioInput!) {
+  CrearFormulario(input: $input) {
+    formularioId
+    nombre
+    ruc
+    email
+    celular
+  }
+}
+    `;
+export type CrearFormularioMutationFn = Apollo.MutationFunction<CrearFormularioMutation, CrearFormularioMutationVariables>;
+
+/**
+ * __useCrearFormularioMutation__
+ *
+ * To run a mutation, you first call `useCrearFormularioMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCrearFormularioMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [crearFormularioMutation, { data, loading, error }] = useCrearFormularioMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCrearFormularioMutation(baseOptions?: Apollo.MutationHookOptions<CrearFormularioMutation, CrearFormularioMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CrearFormularioMutation, CrearFormularioMutationVariables>(CrearFormularioDocument, options);
+      }
+export type CrearFormularioMutationHookResult = ReturnType<typeof useCrearFormularioMutation>;
+export type CrearFormularioMutationResult = Apollo.MutationResult<CrearFormularioMutation>;
+export type CrearFormularioMutationOptions = Apollo.BaseMutationOptions<CrearFormularioMutation, CrearFormularioMutationVariables>;
 export const LoginDocument = gql`
     mutation login($input: loginInput!) {
   login(input: $input) {
@@ -693,7 +743,7 @@ export type GetAllCategoriasQueryHookResult = ReturnType<typeof useGetAllCategor
 export type GetAllCategoriasLazyQueryHookResult = ReturnType<typeof useGetAllCategoriasLazyQuery>;
 export type GetAllCategoriasQueryResult = Apollo.QueryResult<GetAllCategoriasQuery, GetAllCategoriasQueryVariables>;
 export const GetBusquedaAvanzadaDocument = gql`
-    query GetBusquedaAvanzada($page: Int, $numberPaginate: Int, $volkswagen: Int, $mercedes: Int, $c17210od: Int, $of1722: Int, $cummins: Int, $om366: Int, $om906: Int, $om924: Int, $categoriaId: Int) {
+    query GetBusquedaAvanzada($page: Int, $numberPaginate: Int, $volkswagen: Int, $mercedes: Int, $c17210od: Int, $of1722: Int, $of1721: Int, $cummins: Int, $om366: Int, $om906: Int, $om924: Int, $categoriaId: Int) {
   GetBusquedaAvanzada(
     page: $page
     numberPaginate: $numberPaginate
@@ -701,6 +751,7 @@ export const GetBusquedaAvanzadaDocument = gql`
     mercedes: $mercedes
     c17210od: $c17210od
     of1722: $of1722
+    of1721: $of1721
     cummins: $cummins
     om366: $om366
     om906: $om906
@@ -725,6 +776,7 @@ export const GetBusquedaAvanzadaDocument = gql`
       mercedes
       c17210od
       of1722
+      of1721
       cummins
       om366
       om906
@@ -772,6 +824,7 @@ export const GetBusquedaAvanzadaDocument = gql`
  *      mercedes: // value for 'mercedes'
  *      c17210od: // value for 'c17210od'
  *      of1722: // value for 'of1722'
+ *      of1721: // value for 'of1721'
  *      cummins: // value for 'cummins'
  *      om366: // value for 'om366'
  *      om906: // value for 'om906'
@@ -814,6 +867,16 @@ export const GetIdTiendasDocument = gql`
     om366
     om906
     om924
+    Asesor {
+      asesorId
+      nombre
+      url
+    }
+    Sede {
+      sedeId
+      direccion
+      lugar
+    }
     Categorias {
       categoriaId
       titulo
