@@ -16,7 +16,7 @@ const Whatsapp = ({ asesores = [] }) => {
             target="_blank"
             rel="noreferrer"
             className={`btn ${styles.whatsapp_item}`}
-            href={`https://${url}`}
+            href={url}
           >
             <WhatsappIcon />
             <p>{nombre}</p>
