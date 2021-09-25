@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 
 // Terceros
@@ -12,7 +12,7 @@ import Store from '@/svg/Store'
 
 // styles
 import styles from './sidebar.module.scss'
-import { AuthContext } from '@/context/auth/AuthState'
+// import { AuthContext } from '@/context/auth/AuthState'
 import useAuth from '@/hooks/useAuth'
 
 const variants = {
@@ -34,10 +34,9 @@ const fade = {
 }
 
 const Sidebar = ({ isOpen = false, onClose }) => {
-
-  const { logout, user } = useAuth();
-  const [showMenuPerfil, setShowMenuPerfil] = useState(false);
-
+  /* eslint-disable */
+  const { logout, user } = useAuth()
+  const [showMenuPerfil, setShowMenuPerfil] = useState(false)
 
   return (
     <aside
@@ -72,92 +71,81 @@ const Sidebar = ({ isOpen = false, onClose }) => {
           />
         </div>
         <div>
-        {
-          user?.apiToken && 
-        <h4 className={styles.sidebar_username}>Bienvenido {user?.nombre.split(' ')[0]}</h4>
-        }
-        <ul className={styles.sidebar_links}>
-          <li>
-            <Link href="/">
-              <a onClick={onClose}>
-                <Home /> Inicio
-              </a>
-            </Link>
-          </li>
-          <li>
-            {
-              user?.apiToken ?
-               
+          {user?.apiToken && (
+            <h4 className={styles.sidebar_username}>
+              Bienvenido {user?.nombre.split(' ')[0]}
+            </h4>
+          )}
+          <ul className={styles.sidebar_links}>
+            <li>
+              <Link href="/">
+                <a onClick={onClose}>
+                  <Home /> Inicio
+                </a>
+              </Link>
+            </li>
+            <li>
+              {user?.apiToken ? (
                 <>
                   <Link href="">
                     <a
-                      onClick={() => setShowMenuPerfil(prevState => !prevState)}
+                      onClick={() =>
+                        setShowMenuPerfil((prevState) => !prevState)
+                      }
                     >
-                      <User />Perfil
+                      <User />
+                      Perfil
                     </a>
-
                   </Link>
-                  {
-                    showMenuPerfil ?
-                      <ul className={styles.sidebar_menuPerfil}>
-                        <Link href="/editarPerfil" >
-                          <a onClick={onClose}>
-                            Editar Perfil
-                          </a>
-
-                        </Link>
-                        <Link href="/cambiarPassword">
-                          <a onClick={onClose}>
-                            Cambiar contraseña
-                          </a>
-
-                        </Link>
-                        <Link href="/">
-                          <a
+                  {showMenuPerfil ? (
+                    <ul className={styles.sidebar_menuPerfil}>
+                      <Link href="/editarPerfil">
+                        <a onClick={onClose}>Editar Perfil</a>
+                      </Link>
+                      <Link href="/cambiarPassword">
+                        <a onClick={onClose}>Cambiar contraseña</a>
+                      </Link>
+                      <Link href="/">
+                        <a
                           className="btn-logout"
-                            onClick={() => {
-                              logout()
-                              setDataStorage(null)
-                              setShowMenuPerfil(false)
-                            }}
-                          >
-                            Cerrar sesión
-                          </a>
-
-                        </Link>
-                      </ul>
-                      :
-                      null
-                  }
+                          onClick={() => {
+                            logout()
+                            setDataStorage(null)
+                            setShowMenuPerfil(false)
+                          }}
+                        >
+                          Cerrar sesión
+                        </a>
+                      </Link>
+                    </ul>
+                  ) : null}
                 </>
-                :
+              ) : (
                 <Link href="/ingresa">
                   <a onClick={onClose}>
                     <User /> Ingresa
                   </a>
-
                 </Link>
-            }
-          </li>
-          {
-            !user?.apiToken &&
+              )}
+            </li>
+            {!user?.apiToken && (
+              <li>
+                <Link href="/registrate">
+                  <a onClick={onClose}>
+                    <List /> Regístrate
+                  </a>
+                </Link>
+              </li>
+            )}
+
             <li>
-            <Link href="/registrate">
-              <a onClick={onClose}>
-                <List /> Regístrate
-              </a>
-            </Link>
-          </li>
-          }
-          
-          <li>
-            <Link href="/registra-tu-tienda">
-              <a onClick={onClose}>
-                <Store /> Registra tu tienda
-              </a>
-            </Link>
-          </li>
-        </ul>
+              <Link href="/registra-tu-tienda">
+                <a onClick={onClose}>
+                  <Store /> Registra tu tienda
+                </a>
+              </Link>
+            </li>
+          </ul>
         </div>
       </motion.div>
     </aside>

@@ -17,9 +17,6 @@ import useDisclosure from '../hooks/useDisclosure'
 const MyApp = ({ Component, pageProps }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  
-
-
   return (
     <div>
       <ApolloProvider client={client}>

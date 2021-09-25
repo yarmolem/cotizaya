@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useFormik } from 'formik'
@@ -17,7 +17,6 @@ import { toast } from 'react-toastify'
 import Error from '@/components/Error'
 
 const Ingresa = () => {
-
   const router = useRouter()
   const { login } = useAuth()
   const [showPassword, setShowPassword] = useState(false)
