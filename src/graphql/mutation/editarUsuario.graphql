@@ -1,0 +1,8 @@
+mutation UpdateUsuario($input: UserInput){
+  UpdateUsuario(input:$input){
+    apiToken
+    nombre
+    correo
+    celular
+  }
+}

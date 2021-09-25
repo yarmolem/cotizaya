@@ -547,6 +547,20 @@ export type RegistroMutationVariables = Exact<{
 
 export type RegistroMutation = { __typename?: 'Mutation', Registro?: Maybe<{ __typename?: 'User', userId?: Maybe<string>, nombre?: Maybe<string>, correo?: Maybe<string>, celular?: Maybe<string>, apiToken?: Maybe<string>, tipoUsuario?: Maybe<number>, imagenPrincipal?: Maybe<{ __typename?: 'Imagenes', id?: Maybe<string>, descripcion?: Maybe<string>, url?: Maybe<string> }> }> };
 
+export type CambiarContrasenaUsuarioMutationVariables = Exact<{
+  input: CambiarContrasenaInput;
+}>;
+
+
+export type CambiarContrasenaUsuarioMutation = { __typename?: 'Mutation', CambiarContrasenaUsuario?: Maybe<{ __typename?: 'User', nombre?: Maybe<string>, correo?: Maybe<string>, celular?: Maybe<string> }> };
+
+export type UpdateUsuarioMutationVariables = Exact<{
+  input?: Maybe<UserInput>;
+}>;
+
+
+export type UpdateUsuarioMutation = { __typename?: 'Mutation', UpdateUsuario?: Maybe<{ __typename?: 'User', apiToken?: Maybe<string>, nombre?: Maybe<string>, correo?: Maybe<string>, celular?: Maybe<string> }> };
+
 export type GetAllCategoriasQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -701,6 +715,77 @@ export function useRegistroMutation(baseOptions?: Apollo.MutationHookOptions<Reg
 export type RegistroMutationHookResult = ReturnType<typeof useRegistroMutation>;
 export type RegistroMutationResult = Apollo.MutationResult<RegistroMutation>;
 export type RegistroMutationOptions = Apollo.BaseMutationOptions<RegistroMutation, RegistroMutationVariables>;
+export const CambiarContrasenaUsuarioDocument = gql`
+    mutation CambiarContrasenaUsuario($input: CambiarContrasenaInput!) {
+  CambiarContrasenaUsuario(input: $input) {
+    nombre
+    correo
+    celular
+  }
+}
+    `;
+export type CambiarContrasenaUsuarioMutationFn = Apollo.MutationFunction<CambiarContrasenaUsuarioMutation, CambiarContrasenaUsuarioMutationVariables>;
+
+/**
+ * __useCambiarContrasenaUsuarioMutation__
+ *
+ * To run a mutation, you first call `useCambiarContrasenaUsuarioMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCambiarContrasenaUsuarioMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [cambiarContrasenaUsuarioMutation, { data, loading, error }] = useCambiarContrasenaUsuarioMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCambiarContrasenaUsuarioMutation(baseOptions?: Apollo.MutationHookOptions<CambiarContrasenaUsuarioMutation, CambiarContrasenaUsuarioMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CambiarContrasenaUsuarioMutation, CambiarContrasenaUsuarioMutationVariables>(CambiarContrasenaUsuarioDocument, options);
+      }
+export type CambiarContrasenaUsuarioMutationHookResult = ReturnType<typeof useCambiarContrasenaUsuarioMutation>;
+export type CambiarContrasenaUsuarioMutationResult = Apollo.MutationResult<CambiarContrasenaUsuarioMutation>;
+export type CambiarContrasenaUsuarioMutationOptions = Apollo.BaseMutationOptions<CambiarContrasenaUsuarioMutation, CambiarContrasenaUsuarioMutationVariables>;
+export const UpdateUsuarioDocument = gql`
+    mutation UpdateUsuario($input: UserInput) {
+  UpdateUsuario(input: $input) {
+    apiToken
+    nombre
+    correo
+    celular
+  }
+}
+    `;
+export type UpdateUsuarioMutationFn = Apollo.MutationFunction<UpdateUsuarioMutation, UpdateUsuarioMutationVariables>;
+
+/**
+ * __useUpdateUsuarioMutation__
+ *
+ * To run a mutation, you first call `useUpdateUsuarioMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateUsuarioMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateUsuarioMutation, { data, loading, error }] = useUpdateUsuarioMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateUsuarioMutation(baseOptions?: Apollo.MutationHookOptions<UpdateUsuarioMutation, UpdateUsuarioMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateUsuarioMutation, UpdateUsuarioMutationVariables>(UpdateUsuarioDocument, options);
+      }
+export type UpdateUsuarioMutationHookResult = ReturnType<typeof useUpdateUsuarioMutation>;
+export type UpdateUsuarioMutationResult = Apollo.MutationResult<UpdateUsuarioMutation>;
+export type UpdateUsuarioMutationOptions = Apollo.BaseMutationOptions<UpdateUsuarioMutation, UpdateUsuarioMutationVariables>;
 export const GetAllCategoriasDocument = gql`
     query GetAllCategorias {
   GetAllCategorias {

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useFormik } from 'formik'
@@ -17,6 +17,7 @@ import { toast } from 'react-toastify'
 import Error from '@/components/Error'
 
 const Ingresa = () => {
+
   const router = useRouter()
   const { login } = useAuth()
   const [showPassword, setShowPassword] = useState(false)
@@ -32,14 +33,12 @@ const Ingresa = () => {
         const { __typename, imagenPrincipal, ...rest } = res.data.login
         login(rest)
         router.push('/')
-        toast.success('Login Exitoso')
+
+        toast.success(`Bienvenido ${rest.nombre}`)
       } else {
         const error = res.errors.graphQLErrors[0].debugMessage
-        if (
-          error === 'CUENTA_DESACTIVADA' ||
-          error === 'CONTRASEÑA_INCORRECTA'
-        ) {
-          toast.error('Correo o contraseña invalido')
+        if (error) {
+          toast.error(error)
         }
       }
     },

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
 
 // Terceros
@@ -12,6 +12,8 @@ import Store from '@/svg/Store'
 
 // styles
 import styles from './sidebar.module.scss'
+import { AuthContext } from '@/context/auth/AuthState'
+import useAuth from '@/hooks/useAuth'
 
 const variants = {
   open: {
@@ -32,6 +34,11 @@ const fade = {
 }
 
 const Sidebar = ({ isOpen = false, onClose }) => {
+
+  const { logout, user } = useAuth();
+  const [showMenuPerfil, setShowMenuPerfil] = useState(false);
+
+
   return (
     <aside
       className={styles.sidebar}
@@ -64,7 +71,11 @@ const Sidebar = ({ isOpen = false, onClose }) => {
             alt="Logo Cotizaya"
           />
         </div>
-
+        <div>
+        {
+          user?.apiToken && 
+        <h4 className={styles.sidebar_username}>Bienvenido {user?.nombre.split(' ')[0]}</h4>
+        }
         <ul className={styles.sidebar_links}>
           <li>
             <Link href="/">
@@ -74,19 +85,71 @@ const Sidebar = ({ isOpen = false, onClose }) => {
             </Link>
           </li>
           <li>
-            <Link href="/ingresa">
-              <a onClick={onClose}>
-                <User /> Ingresa
-              </a>
-            </Link>
+            {
+              user?.apiToken ?
+               
+                <>
+                  <Link href="">
+                    <a
+                      onClick={() => setShowMenuPerfil(prevState => !prevState)}
+                    >
+                      <User />Perfil
+                    </a>
+
+                  </Link>
+                  {
+                    showMenuPerfil ?
+                      <ul className={styles.sidebar_menuPerfil}>
+                        <Link href="/editarPerfil" >
+                          <a onClick={onClose}>
+                            Editar Perfil
+                          </a>
+
+                        </Link>
+                        <Link href="/cambiarPassword">
+                          <a onClick={onClose}>
+                            Cambiar contraseña
+                          </a>
+
+                        </Link>
+                        <Link href="/">
+                          <a
+                          className="btn-logout"
+                            onClick={() => {
+                              logout()
+                              setDataStorage(null)
+                              setShowMenuPerfil(false)
+                            }}
+                          >
+                            Cerrar sesión
+                          </a>
+
+                        </Link>
+                      </ul>
+                      :
+                      null
+                  }
+                </>
+                :
+                <Link href="/ingresa">
+                  <a onClick={onClose}>
+                    <User /> Ingresa
+                  </a>
+
+                </Link>
+            }
           </li>
-          <li>
+          {
+            !user?.apiToken &&
+            <li>
             <Link href="/registrate">
               <a onClick={onClose}>
                 <List /> Regístrate
               </a>
             </Link>
           </li>
+          }
+          
           <li>
             <Link href="/registra-tu-tienda">
               <a onClick={onClose}>
@@ -95,6 +158,7 @@ const Sidebar = ({ isOpen = false, onClose }) => {
             </Link>
           </li>
         </ul>
+        </div>
       </motion.div>
     </aside>
   )
