@@ -166,14 +166,16 @@ const Proveedores = () => {
                     key={`proveedores-${tienda.tiendaId}`}
                     className={styles.proveedores_slideritem}
                   >
-                    <img
-                      src={
-                        tienda.imagenPrincipal.id
-                          ? tienda.imagenPrincipal.url
-                          : '/images/tienda.jpg'
-                      }
-                      alt=""
-                    />
+                    <div>
+                      <img
+                        src={
+                          tienda.imagenPrincipal.id
+                            ? tienda.imagenPrincipal.url
+                            : '/images/tienda.jpg'
+                        }
+                        alt=""
+                      />
+                    </div>
                     <div>
                       <button
                         onClick={() => handleDetailStore(tienda.slug)}
@@ -197,14 +199,16 @@ const Proveedores = () => {
                   {cat.tienda.map((tienda, i) => (
                     <SwiperSlide key={`proveedores-${tienda.tiendaId}`}>
                       <div className={styles.proveedores_slideritem}>
-                        <img
-                          src={
-                            tienda.imagenPrincipal.id
-                              ? tienda.imagenPrincipal.url
-                              : '/images/tienda.jpg'
-                          }
-                          alt=""
-                        />
+                        <div>
+                          <img
+                            src={
+                              tienda.imagenPrincipal.id
+                                ? tienda.imagenPrincipal.url
+                                : '/images/tienda.jpg'
+                            }
+                            alt=""
+                          />
+                        </div>
                         <div>
                           <button
                             onClick={() => handleDetailStore(tienda.slug)}
